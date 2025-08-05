@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频解析结果 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/video_results.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">视频解析结果</div>
+        <nav>
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2 id="video-results-title">视频ID: <span id="display-video-id"></span> 的人员特征</h2>
+            <button id="export-results-button" class="button primary">导出全部特征图片</button>
+            <div id="video-persons-container" class="results-grid"></div>
+            <p id="no-video-persons-message" class="hidden">未找到该视频的解析结果。</p>
+            <div id="video-persons-loading" class="hidden">
+                <div class="spinner"></div>
+                <p>正在加载解析结果...</p>
+            </div>
+            
+            <div id="pagination-controls-video" class="pagination-controls hidden">
+                <button id="first-page-video" class="pagination-button">首页</button>
+                <button id="prev-page-video" class="pagination-button">上一页</button>
+                <span>页码 <span id="current-page-video">1</span> / <span id="total-pages-video">1</span></span>
+                <button id="next-page-video" class="pagination-button">下一页</button>
+                <button id="last-page-video" class="pagination-button">尾页</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="hidden">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <a class="prev" id="lightbox-prev">&#10094;</a>
+        <a class="next" id="lightbox-next">&#10095;</a>
+    </div>
+
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initVideoResultsPage } from '/static/js/video_results.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+            initVideoResultsPage();
+        });
+    </script>
+</body>
+</html> 

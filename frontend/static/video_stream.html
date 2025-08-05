@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频流解析管理 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/video_stream.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">视频流解析</div>
+        <nav>
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" id="add-stream-section">
+            <h2>添加新视频流</h2>
+            <form id="add-stream-form">
+                <div class="form-grid-row">
+                    <div class="form-group">
+                        <label for="stream-name">视频流名称:</label>
+                        <input type="text" id="stream-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rtsp-url">方式一: RTSP/HTTP 视频流地址:</label>
+                        <input type="text" id="rtsp-url" placeholder="rtsp://your.stream.url/feed">
+                    </div>
+                </div>
+                
+                <div class="form-grid-row">
+                    <div class="form-group">
+                        <label for="api-stream-url">方式二: API 视频流地址 (直接URL):</label>
+                        <input type="text" id="api-stream-url" placeholder="http://your.api.com/stream/feed">
+                    </div>
+                    <div class="form-group">
+                        <label for="monitor-point-id">方式三: 监控点编号 (通过API获取视频流):</label>
+                        <input type="text" id="monitor-point-id" placeholder="输入监控点编号">
+                    </div>
+                </div>
+                
+                <button type="submit" class="button primary">保存并开始解析</button>
+            </form>
+            <p id="add-stream-message" class="message hidden"></p>
+        </div>
+
+        <div class="card">
+            <h2>已保存视频流列表</h2>
+            <p id="no-streams-message">暂无已保存的视频流。</p>
+            <div class="table-responsive">
+                <table id="saved-streams-table" class="data-table hidden">
+                    <thead>
+                        <tr>
+                            <th>序号</th> 
+                            <th>名称</th>
+                            <th>地址</th>
+                            <th>状态</th>
+                            <th>最后处理时间</th>
+                            <th id="adder-header">添加用户</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Stream rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="streamPaginationControls" class="pagination-controls" style="display: none;">
+                <button id="firstPageStreams" class="pagination-button">首页</button>
+                <button id="prevPageStreams" class="pagination-button">上一页</button>
+                <span>页码 <span id="currentPageStreams">1</span> / <span id="totalPagesStreams">1</span></span>
+                <button id="nextPageStreams" class="pagination-button">下一页</button>
+                <button id="lastPageStreams" class="pagination-button">尾页</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="hidden">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initVideoStreamPage } from '/static/js/video_stream.js'; // 导入视频流页面的初始化函数
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+            initVideoStreamPage(); // 调用视频流页面的初始化函数
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频解析 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/video_analysis.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">视频解析</div>
+        <nav>
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="video-section">
+                <div class="upload-controls" id="video-upload-section">
+                    <input type="file" id="video-upload-input" accept="video/mp4,video/x-m4v,video/*">
+                    <label for="video-upload-input" class="button">选择视频文件</label>
+                    <span id="selected-file-name" class="selected-file-name">未选择文件</span>
+                    <button id="upload-video-button">上传并开始处理</button>
+                </div>
+                <div id="upload-status" class="status-text"></div>
+                <div class="video-list-container">
+                    <h3>已处理视频列表</h3>
+                    <div class="table-responsive">
+                        <table id="video-list-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>序号</th> 
+                                    <th>文件名</th>
+                                    <th>处理状态</th>
+                                    <th>进度</th>
+                                    <th>入库时间</th>
+                                    <th id="uploader-header">上传用户</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="video-list-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                    <div id="videoPaginationControls" class="pagination-controls" style="display: none;">
+                        <button id="firstPageVideos" class="pagination-button">首页</button>
+                        <button id="prevPageVideos" class="pagination-button">上一页</button>
+                        <span>页码 <span id="currentPageVideos">1</span> / <span id="totalPagesVideos">1</span></span>
+                        <button id="nextPageVideos" class="pagination-button">下一页</button>
+                        <button id="lastPageVideos" class="pagination-button">尾页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initVideoAnalysisPage } from '/static/js/video_analysis.js'; // 导入视频解析页面的初始化函数
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+            initVideoAnalysisPage(); // 调用视频解析页面的初始化函数
+        });
+    </script>
+</body>
+</html>

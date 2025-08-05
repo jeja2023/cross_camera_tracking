@@ -1,0 +1,250 @@
+/* Person List Specific Styles */
+
+.uuid-column {
+    width: 360px; /* Doubled width for UUID column */
+    word-break: break-all;
+}
+
+.source-column {
+    width: 40px; /* Halved width for source column */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.person-crop-img {
+    width: 60px; /* 统一宽度 */
+    height: 60px; /* 统一高度 */
+    object-fit: cover; /* 保持图片比例，裁剪超出部分 */
+    border-radius: 4px; /* 轻微圆角 */
+}
+
+.container {
+    padding: 20px;
+    max-width: 1800px; /* 增加最大宽度 */
+    margin: 0 auto; /* 居中显示 */
+}
+
+.person-list-section {
+    margin-top: 20px;
+}
+
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 输入框和筛选按钮之间的间距 */
+    margin-bottom: 20px; /* 添加底部间距 */
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.filter-section input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1; /* 允许输入框在必要时扩展 */
+    max-width: 250px; /* 限制输入框的最大宽度 */
+    font-size: 1em;
+}
+
+.filter-section button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.filter-section button:hover {
+    background-color: #0056b3;
+}
+
+/* 创建时间单元格样式 */
+.created-at-cell {
+    white-space: normal; /* 允许文本正常换行 */
+    word-break: break-word; /* 允许长单词内部换行 */
+    text-align: center; /* 文本居中 */
+    display: table-cell; /* 强制其作为表格单元格的行为 */
+    width: 10%; /* 将创建时间列的宽度调小 */
+}
+
+/* 添加姓名列样式 */
+.name-column {
+    width: 17.5%; /* 调宽姓名列 */
+}
+
+/* 添加操作列样式 */
+.actions-column {
+    width: 17.5%; /* 调宽操作列 */
+}
+
+/* Modal Styles - REMOVED: Using common.css for lightbox styles */
+/*
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content,
+#caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
+}
+
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+*/
+
+/* Pagination Controls */
+.pagination-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-controls button {
+    padding: 8px 15px;
+    margin: 0 5px;
+    border: none; /* 移除边框 */
+    background-color: #007bff; /* 蓝色背景 */
+    color: white; /* 白色文字 */
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #0056b3; /* 鼠标悬停时的深蓝色 */
+}
+
+.pagination-controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; /* 禁用状态下的透明度 */
+    background-color: #a0cbed; /* 禁用状态下的浅蓝色 */
+}
+
+.pagination-controls span {
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+/* Modal Navigation Buttons - REMOVED: Using common.css for lightbox navigation styles */
+/*
+.modal-nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 5px;
+    user-select: none;
+}
+
+.modal-nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+*/
+
+/* Custom styles for Follow/Unfollow buttons */
+.follow-button, .unfollow-button {
+    padding: 5px 10px; /* Make buttons smaller */
+    font-size: 0.85em; /* Smaller font size */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 2px; /* Add a small horizontal margin for spacing */
+    border: none; /* Remove default border */
+}
+
+.follow-button {
+    background-color: #28a745; /* Green for Follow */
+    color: white;
+}
+
+.follow-button:hover {
+    background-color: #218838;
+}
+
+.unfollow-button {
+    background-color: #dc3545; /* Red for Unfollow */
+    color: white;
+}
+
+.unfollow-button:hover {
+    background-color: #c82333;
+} 

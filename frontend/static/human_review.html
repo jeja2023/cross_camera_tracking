@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人机回环审核 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/human_review.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">人机回环审核</div>
+        <nav>
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="human-review-section">
+            <h2>待审核人物列表</h2>
+            <div class="filter-controls">
+                <label for="filter-status">状态:</label>
+                <select id="filter-status">
+                    <option value="unverified">未审核</option>
+                    <option value="all">所有</option>
+                    <option value="verified">已审核</option>
+                    <option value="marked_for_retrain">待再训练</option>
+                    <option value="trained">已训练</option>
+                </select>
+                <button id="apply-filter-button">查询</button>
+                <button id="retrain-model-button" class="button primary-button">模型训练</button>
+            </div>
+            <div id="person-list" class="person-grid">
+                <!-- 人物卡片将在这里动态加载 -->
+            </div>
+            <div class="pagination">
+                <button id="first-page" class="pagination-button">首页</button>
+                <button id="prev-page" disabled>&lt; 上一页</button>
+                <span id="page-info">页码 1 / 1</span>
+                <button id="next-page" disabled>下一页 &gt;</button>
+                <button id="last-page" class="pagination-button">尾页</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- 纠正模态框 -->
+    <div id="correction-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>纠正人物信息</h2>
+            <div class="form-group">
+                <label for="correction-type">纠正类型:</label>
+                <select id="correction-type">
+                    <option value="misdetection">误检</option>
+                    <option value="relabel">重新标注</option>
+                    <option value="merge">合并人员</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+            
+            <!-- 合并人员专用区域 -->
+            <div id="merge-person-section" style="display: none;">
+                <div class="form-group">
+                    <label for="target-person-uuid">目标人物 UUID:</label>
+                    <input type="text" id="target-person-uuid" placeholder="请输入要合并到的目标人物 UUID">
+                    <button id="search-target-person-uuid" class="button">搜索目标人物 (UUID)</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="target-person-idcard">目标人物身份证号:</label>
+                    <input type="text" id="target-person-idcard" placeholder="请输入要合并到的目标人物身份证号">
+                    <button id="search-target-person-idcard" class="button">搜索目标人物 (身份证号)</button>
+                </div>
+
+                <div id="target-person-info" class="info-box" style="display: none;">
+                    <p>UUID: <span id="target-info-uuid"></span></p>
+                    <p>姓名: <span id="target-info-name"></span></p>
+                    <p>身份证号: <span id="target-info-idcard"></span></p> <!-- 新增显示身份证号 -->
+                    <img id="target-info-image" src="" alt="目标人物裁剪图" style="max-width: 80px; max-height: 80px;">
+                    <button id="select-target-person" class="button">选择此人物作为合并目标</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="correction-details">详细说明:</label>
+                <textarea id="correction-details" rows="5" placeholder="请输入详细的纠正说明..."></textarea>
+            </div>
+            <button id="submit-correction-button">提交纠正</button>
+        </div>
+    </div>
+
+    <!-- 模型训练进度模态框 -->
+    <div id="retrain-progress-modal" class="modal">
+        <div class="modal-content">
+            <h2>模型训练进度</h2>
+            <div class="progress-container">
+                <div class="progress-bar" id="retrain-progress-bar" style="width: 0%;"></div>
+            </div>
+            <p id="retrain-status-text">任务已启动...</p>
+            <button id="close-retrain-modal-button" class="button">关闭</button>
+        </div>
+    </div>
+
+    <script src="/static/js/common.js" type="module"></script>
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/human_review.js" type="module"></script>
+</body>
+</html> 

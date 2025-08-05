@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录/注册 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>跨域智能识别系统</h1>
+        <div class="form-toggle">
+            <button id="show-login-btn" class="active">登录</button>
+            <button id="show-register-btn">注册</button>
+        </div>
+
+        <div id="login-section" class="form-section active">
+            <h2>登录</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="text" id="username" name="username" required placeholder="请输入用户名">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" required placeholder="请输入密码">
+                    <span class="toggle-password" data-target="password">👁️</span>
+                </div>
+                <button type="submit">登录</button>
+                <p id="login-message" class="error-message"></p>
+            </form>
+        </div>
+
+        <div id="register-section" class="form-section">
+            <h2>注册新用户</h2>
+            <form id="register-form">
+                <div class="input-group">
+                    <input type="text" id="reg-username" name="username" required placeholder="请输入用户名 (必填)">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="reg-unit" name="unit" required placeholder="请输入单位 (必填)">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="reg-phone-number" name="phone_number" required placeholder="请输入手机号码 (必填)">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="reg-password" name="password" required placeholder="请输入密码 (必填)">
+                    <span class="toggle-password" data-target="reg-password">👁️</span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="reg-confirm-password" name="confirm_password" required placeholder="请再次输入密码 (必填)">
+                    <span class="toggle-password" data-target="reg-confirm-password">👁️</span>
+                </div>
+                
+                <button type="submit">注册</button>
+                <p id="register-message" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/js/login.js" type="module"></script>
+    <script src="/static/js/auth.js" type="module"></script>
+</body>
+</html>

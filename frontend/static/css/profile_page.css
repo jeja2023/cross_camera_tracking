@@ -1,0 +1,71 @@
+/* Styles for profile_page.html */
+
+.container {
+    max-width: 600px; /* 限制容器宽度，使其居中显示 */
+    margin: 20px auto; /* 居中显示 */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.card h2, .card h3 {
+    text-align: center; /* 标题居中 */
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.card h3 {
+    margin-top: 15px;
+}
+
+.card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 增加表单组之间的间距 */
+    align-items: center; /* 使表单内容水平居中 */
+}
+
+.form-item-row {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    width: 80%; /* 限制每行的总宽度 */
+    max-width: 500px; /* 每行最大宽度 */
+    gap: 15px; /* 标签和输入框之间的间距 */
+    justify-content: center; /* 水平居中内容 */
+}
+
+.card form label {
+    font-weight: bold;
+    color: #555;
+    flex-shrink: 0; /* 防止标签收缩 */
+    text-align: right; /* 标签文字右对齐 */
+    width: 120px; /* 设置标签固定宽度 */
+    margin-bottom: 0; /* 移除标签底部外边距 */
+}
+
+.card form input[type="text"],
+.card form input[type="password"] {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    flex-grow: 1; /* 输入框占据剩余空间 */
+    box-sizing: border-box;
+}
+
+.card form button[type="submit"] {
+    margin-top: 20px; /* 增加按钮上方的间距 */
+    width: 50%; /* 调整按钮宽度 */
+    max-width: 200px; /* 设置按钮最大宽度 */
+    align-self: center; /* 按钮自身居中 */
+} 

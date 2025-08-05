@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主动注册人物 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/enroll_person.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">主动注册</div>
+        <nav>
+            <!-- 其他导航链接如果需要可以加在这里 -->
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="enroll-person-section">
+            <h2>主动注册已知人物身份</h2>
+            <p>通过上传多张包含同一人物的照片，预先建立高质量、高纯度的身份特征数据库。</p>
+
+            <div class="form-group">
+                <label for="person-name">人物姓名/标识 (可选):</label>
+                <input type="text" id="person-name" placeholder="请输入人物姓名或标识，如“张三”">
+            </div>
+
+            <div class="form-group">
+                <label for="id-card">身份证号或其他ID (可选):</label>
+                <input type="text" id="id-card" placeholder="请输入身份证号或其他唯一ID">
+            </div>
+
+            <div class="form-group">
+                <label for="image-upload">上传图片 (支持多选):</label>
+                <div class="image-upload-area">
+                    <p>拖放图片到此处，或点击选择文件</p>
+                    <input type="file" id="image-upload" accept="image/*" multiple>
+                </div>
+                <div id="image-preview" class="image-preview-grid">
+                    <!-- 图片预览将在这里显示 -->
+                </div>
+            </div>
+
+            <!-- 移除关联到已有人物 UUID 的部分 -->
+            <!--
+            <div class="form-group">
+                <label for="existing-person-uuid">关联到已有人物 UUID (可选):</label>
+                <div class="input-button-group">
+                    <input type="text" id="existing-person-uuid" placeholder="如果您想将图片关联到已有人物，请输入其 UUID">
+                    <button id="search-existing-person" class="button">搜索并选择已有人物</button>
+                </div>
+                <div id="existing-person-info" class="info-box" style="display: none;">
+                    <p>UUID: <span id="info-uuid"></span></p>
+                    <p>姓名: <span id="info-name"></span></p>
+                    <img id="info-image" src="" alt="人物裁剪图" style="max-width: 100px; max-height: 100px;">
+                    <button id="select-existing-person" class="button">选择此人物</button>
+                </div>
+            </div>
+            -->
+
+            <button id="submit-enrollment" class="button primary-button">提交注册</button>
+
+            <div id="status-message" class="status-message"></div>
+        </section>
+    </div>
+
+    <script src="/static/js/common.js" type="module"></script>
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/enroll_person.js" type="module"></script>
+</body>
+</html> 

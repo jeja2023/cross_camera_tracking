@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全部特征图库 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/all_features.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">全部特征图库</div>
+        <nav>
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="top-controls">
+            <div class="filter-export-group">
+                <div class="filter-section">
+                    <input type="text" id="feature-search-input" placeholder="输入特征ID或名称进行筛选...">
+                    <button id="apply-filter-button">筛选</button>
+                </div>
+                <button id="export-features-button" class="button export-button">导出特征图片</button>
+            </div>
+        </div>
+        <div class="card">
+            <div id="all-persons-container" class="results-grid"></div>
+            <p id="no-all-persons-message" class="hidden">未找到任何人员特征。</p>
+            <div id="all-persons-loading" class="hidden">
+                <div class="spinner"></div>
+                <p>正在加载全部特征...</p>
+            </div>
+            
+            
+            <div id="pagination-controls" class="pagination-controls hidden">
+                <button id="first-page" class="pagination-button">首页</button>
+                <button id="prev-page" class="pagination-button">上一页</button>
+                <span>页码 <span id="current-page">1</span> / <span id="total-pages">1</span></span>
+                <button id="next-page" class="pagination-button">下一页</button>
+                <button id="last-page" class="pagination-button">尾页</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="hidden">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <a class="prev" id="lightbox-prev">&#10094;</a>
+        <a class="next" id="lightbox-next">&#10095;</a>
+    </div>
+
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initAllFeaturesPage } from '/static/js/all_features.js'; // 导入全部特征图库页面的初始化函数
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+            initAllFeaturesPage(); // 调用全部特征图库页面的初始化函数
+        });
+    </script>
+</body>
+</html> 

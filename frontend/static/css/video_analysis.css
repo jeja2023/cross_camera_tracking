@@ -1,0 +1,26 @@
+/* 视频管理区样式 */
+.video-section .upload-controls { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 15px; }
+.status-text { text-align: center; margin-top: 10px; font-weight: bold; min-height: 1.2em;}
+.video-list-container { margin-top: 20px; }
+/*
+.table-wrapper { max-height: 400px; overflow-y: auto; border: 1px solid #eee;}
+#video-list-table { width: 100%; border-collapse: collapse; }
+#video-list-table th, #video-list-table td { padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: left; white-space: nowrap; }
+#video-list-table th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1;}
+*/
+
+.actions-buttons-container {
+    display: flex;
+    justify-content: center; /* 将按钮居中 */
+    gap: 10px;
+    align-items: center;
+    height: 100%; /* Ensure it takes full height of the cell */
+}
+
+.delete-button {
+    background-color: #dc3545; /* 红色 */
+}
+
+.delete-button:hover {
+    background-color: #c82333; /* 鼠标悬停时稍暗的红色 */
+} 
