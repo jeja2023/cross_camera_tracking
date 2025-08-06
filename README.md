@@ -124,7 +124,7 @@
 
 ### 1. 克隆仓库
 ```bash
-git clone https://github.com/your-repo/cross_camera_tracking.git
+git clone https://github.com/jeja2023/cross_camera_tracking.git
 cd cross_camera_tracking
 ```
 
