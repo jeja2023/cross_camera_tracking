@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>以图搜人 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/image_search.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">以图搜人</div>
+        <nav>
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="main-layout">
+
+                <div class="query-section">
+                    
+                    <div class="upload-area">
+                        <input type="file" id="query-image-input" accept="image/*" style="display: none;">
+                        <label for="query-image-input" class="upload-label">点击选择查询图片</label>
+                        <img id="image-preview" src="" alt="图片预览" class="hidden">
+                    </div>
+
+                    <div class="controls">
+                        <div class="control-item">
+                            <span class="search-scope-display">搜索范围: 全局搜索</span>
+                        </div>
+                        <div class="control-item">
+                            <label for="threshold-slider">相似度阈值: <span id="threshold-value">80</span>%</label>
+                            <input type="range" id="threshold-slider" min="50" max="99" value="80">
+                        </div>
+                        <button id="search-button">开始搜索</button>
+                        <button id="export-search-results-button" class="button" style="margin-top: 10px;">导出搜索结果</button>
+                    </div>
+
+                </div>
+                <div class="results-section">
+                    <h3>搜索结果</h3>
+                    
+                    <div id="query-person-nav" class="query-person-nav hidden">
+                        <button id="prev-query-person" class="pagination-button">&lt; 上一个查询人物</button>
+                        <span id="current-query-person-info"></span>
+                        <button id="next-query-person" class="pagination-button">下一个查询人物 &gt;</button>
+                    </div>
+
+                    <div id="loading-indicator" class="hidden">
+                        <div class="spinner"></div>
+                        <p>正在搜索中...</p>
+                    </div>
+                    
+                    <div id="results-container">
+                        </div>
+
+                    <p id="no-results-message" class="hidden">未找到符合条件的匹配项。</p>
+                    
+                    <div id="pagination-controls-search" class="pagination-controls hidden">
+                        <button id="first-page-search" class="pagination-button">首页</button>
+                        <button id="prev-page-search" class="pagination-button">上一页</button>
+                        <span>页码 <span id="current-page-search">1</span> / <span id="total-pages-search">1</span></span>
+                        <button id="next-page-search" class="pagination-button">下一页</button>
+                        <button id="last-page-search" class="pagination-button">尾页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="hidden">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <a class="prev" id="lightbox-prev">&#10094;</a>
+        <a class="next" id="lightbox-next">&#10095;</a>
+    </div>
+
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initImageSearchPage } from '/static/js/image_search.js'; // 导入以图搜人页面的初始化函数
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+            initImageSearchPage(); // 调用以图搜人页面的初始化函数
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频流解析结果 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/live_stream_results.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">视频流解析结果</div>
+        <nav>
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container" id="live-stream-results">
+        <div class="card">
+            <h2>实时视频流</h2>
+            <img id="live-video-feed" width="100%" style="border: 1px solid #ccc; display: none;" alt="实时视频流">
+            <video id="saved-video-feed" autoplay controls width="100%" style="border: 1px solid #ccc; display: none;"></video>
+            <p id="stream-status-message">等待视频流加载...</p>
+            <div class="button-group">
+                <button id="stop-stream-button" class="button secondary">停止解析</button>
+                <button id="export-results-button" class="button primary">导出解析结果</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>实时提取特征</h2>
+            <div id="new-features-container" class="results-grid"></div>
+            <p id="no-new-features-message" class="hidden">暂未提取到新的特征。</p>
+            <div id="pagination-controls-live" class="pagination-controls hidden">
+                <button id="first-page-live" class="pagination-button">首页</button>
+                <button id="prev-page-live" class="pagination-button">上一页</button>
+                <span>页码 <span id="current-page-live">1</span> / <span id="total-pages-live">1</span></span>
+                <button id="next-page-live" class="pagination-button">下一页</button>
+                <button id="last-page-live" class="pagination-button">尾页</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="hidden">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <a class="prev" id="lightbox-prev">&#10094;</a>
+        <a class="next" id="lightbox-next">&#10095;</a>
+    </div>
+
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initLiveStreamResultsPage } from '/static/js/live_stream_results.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+            initLiveStreamResultsPage();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>功能主页 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">跨域智能识别系统</div>
+        <nav>
+            <!-- 其他导航链接如果需要可以加在这里 -->
+        </nav>
+        <div class="user-info">
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="feature-grid">
+            <div class="feature-card" data-category="image-analysis">
+                <a href="/image_analysis" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>图片解析</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="video-analysis">
+                <a href="/video_analysis" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>视频解析</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="video-stream">
+                <a href="/video_stream" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>视频流解析</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="image-search">
+                <a href="/image_search" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>以图搜人</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="auto-tracking">
+                <a href="/auto_tracking" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>自动追踪</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="all-features">
+                <a href="/all_features" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>全部特征图库</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="enroll-person">
+                <a href="/enroll_person" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>主动注册人物</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="person-list" id="person-list-card">
+                <a href="/person_list" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <section id="person-info-section">
+                        <h2>人员档案</h2>
+                        <div class="person-search-filters">
+                        </div>
+                    </section>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="followed-persons">
+                <a href="/followed_persons" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>关注人员</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="human-review">
+                <a href="/human_review" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>人机回环</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="user-management">
+                <a href="/profile_page" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>个人信息管理</h2>
+                </a>
+            </div>
+
+            <div class="feature-card" data-category="admin-panel">
+                <a href="/admin" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+                    <h2>后台管理</h2>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/common.js" type="module"></script> <!-- 导入 common.js -->
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js'; // 导入通用认证页面初始化函数
+        import { Auth } from '/static/js/auth.js'; // 导入 Auth 对象
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("index.html: DOMContentLoaded event fired. Initializing authenticated page..."); // 更清晰的日志
+            initializeAuthenticatedPage(); // 调用通用认证页面初始化函数
+        });
+    </script>
+</body>
+</html>

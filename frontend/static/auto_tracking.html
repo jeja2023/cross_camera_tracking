@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动追踪 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/auto_tracking.css">
+    <link rel="stylesheet" href="/static/css/historical_tracking.css"> <!-- 新增 -->
+    <link rel="stylesheet" href="/static/css/realtime_tracking.css"> <!-- 新增 -->
+</head>
+<body>
+    <div class="header">
+        <div class="logo">自动追踪</div>
+        <nav>
+            <button class="nav-button tab-button active" data-target="historical-tracking-content">历史追踪</button>
+            <button class="nav-button tab-button" data-target="realtime-tracking-content">实时追踪</button>
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="historical-tracking-content" class="tab-content">
+            <h1>历史追踪功能</h1>
+            <p>这里将显示历史追踪记录。</p>
+            <button id="view-history-button">查看历史记录</button>
+            <!-- 更多历史追踪内容将在这里添加 -->
+        </div>
+
+        <div id="realtime-tracking-content" class="tab-content hidden">
+            <h1>实时追踪功能</h1>
+            <p>这里将进行实时追踪比对。</p>
+            <button id="start-realtime-comparison-button">开始实时比对</button>
+            <!-- 更多实时追踪内容将在这里添加 -->
+        </div>
+    </div>
+
+    <script src="/static/js/common.js" type="module"></script>
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/historical_tracking.js" type="module"></script> <!-- 引入 -->
+    <script src="/static/js/realtime_tracking.js" type="module"></script> <!-- 引入 -->
+    <script src="/static/js/auto_tracking.js" type="module"></script> <!-- 新增 -->
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+        });
+    </script>
+</body>
+</html> 

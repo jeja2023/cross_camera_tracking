@@ -1,0 +1,17 @@
+/* realtime_tracking.css */
+
+.container {
+    padding: 20px;
+    text-align: center;
+}
+
+.container h1 {
+    margin-bottom: 20px;
+}
+
+.container button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

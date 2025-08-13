@@ -1,0 +1,240 @@
+/* followed_person_history.css */
+
+.history-results-section {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.history-results-section h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#history-results-container {
+    display: flex !important;
+    flex-wrap: wrap !important; /* 允许图片换行 */
+    /* overflow-x: auto; */ /* 移除横向滚动 */
+    gap: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    /* max-height: 250px; */ /* 如果需要垂直滚动再放开 */
+    /* overflow-y: hidden; */ /* 移除隐藏垂直滚动条 */
+    padding-bottom: 20px; /* 增加底部填充，防止滚动条遮挡内容 */
+    
+    /* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+    /* &::-webkit-scrollbar { */
+    /*     display: none; */
+    /* } */
+    /* Hide scrollbar for Firefox */
+    /* scrollbar-width: none; */ /* Firefox */
+}
+
+/* Optionally, for IE/Edge */
+/* #history-results-container { */
+/*     -ms-overflow-style: none;  IE and Edge */
+/* } */
+
+.image-grid-item {
+    flex: 0 0 auto; /* 不伸缩，不收缩，基于内容尺寸 */
+    width: calc(20% - 12px); /* 每行显示5张图片 (100%/5 - gap/5 * 4) */
+    /* width: 150px; */ /* 原来的固定宽度可以移除 */
+    height: 200px; /* 固定高度 */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative; /* For confidence score positioning */
+    cursor: pointer; /* Indicate clickable */
+    transition: transform 0.2s ease; /* Smooth hover effect */
+}
+
+.image-grid-item:hover {
+    transform: scale(1.03); /* Slightly enlarge on hover */
+}
+
+.image-grid-item img {
+    max-width: 100%;
+    height: 100%; /* Ensure image fills the item height */
+    object-fit: contain; /* Maintain aspect ratio and fit within content box */
+    border-radius: 3px;
+    display: block; /* Remove extra space below image */
+    margin: 0 auto;
+}
+
+.confidence-score {
+    position: absolute;
+    bottom: 8px; /* Adjusted position */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+}
+
+.message-area {
+    text-align: center;
+    margin: 20px 0;
+    color: #666;
+    font-style: italic;
+}
+
+/* query-controls container for button and time display */
+#query-controls {
+    justify-content: flex-start; /* Aligns items to the left */
+    padding-left: 10px; /* Optional: Add some padding from the left edge */
+}
+
+.query-history-button {
+    /* display: block; */ /* No longer needed as it's part of a flex container */
+    /* margin: 20px auto; */ /* No longer needed due to flex container */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.query-history-button:hover {
+    background-color: #0056b3;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+.pagination-controls button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border: none; /* 移除边框 */
+    background-color: #007bff; /* 蓝色背景 */
+    color: white; /* 白色文字 */
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #0056b3; /* 鼠标悬停时的深蓝色 */
+}
+
+.pagination-controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: #a0cbed; /* 禁用状态下的浅蓝色 */
+}
+
+#page-info {
+    font-size: 1em;
+    color: #555;
+    min-width: 100px; /* 确保空间足够显示页数信息 */
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    margin: auto; /* Center the image */
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain; /* Ensure image fits without cropping */
+    animation: zoomIn 0.3s;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 1001; /* Above modal image */
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    color: #f1f1f1;
+    cursor: pointer;
+    padding: 16px;
+    user-select: none; /* Prevent text selection */
+    transition: 0.3s;
+    z-index: 1001; /* Above modal image */
+}
+
+.modal-nav-button.prev {
+    left: 0;
+}
+
+.modal-nav-button.next {
+    right: 0;
+}
+
+.modal-nav-button:hover {
+    background-color: rgba(0,0,0,0.6);
+}
+
+#image-info {
+    color: #fff;
+    font-size: 1.1em;
+    text-align: center;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes zoomIn {
+    from {transform: scale(0.8);}
+    to {transform: scale(1);}
+}

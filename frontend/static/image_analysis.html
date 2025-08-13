@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片解析 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/image_analysis.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">图片解析</div>
+        <nav>
+            <!-- 无导航链接 -->
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="image-section">
+                <div class="upload-controls" id="image-upload-section">
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                    <label for="imageUpload" class="button">选择图片文件</label>
+                    <span id="selected-file-name" class="selected-file-name">未选择文件</span>
+                    <button id="uploadButton" class="button">上传并开始解析</button>
+                </div>
+                <div id="uploadMessage" class="status-text"></div>
+
+                <div class="image-list-container">
+                    <h3>已解析图片列表</h3>
+                    <div class="table-responsive">
+                        <table id="image-list-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>图片UUID</th>
+                                    <th>上传时间</th>
+                                    <th>检测到人物</th>
+                                    <th id="uploader-header" style="display: none;">上传用户</th> 
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="image-list-table-body">
+                                <!-- 图片解析历史将动态加载到这里 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <p id="noResultsMessage" class="info-message" style="margin-top: 10px;">图片解析历史将显示在此处。</p>
+                    <div id="paginationControls" class="pagination-controls" style="display: none;">
+                        <button id="firstPage" class="pagination-button">首页</button>
+                        <button id="prevPage" class="pagination-button">上一页</button>
+                        <span>页码 <span id="currentPage">1</span> / <span id="totalPages">1</span></span>
+                        <button id="nextPage" class="pagination-button">下一页</button>
+                        <button id="lastPage" class="pagination-button">尾页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="hidden">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <a class="prev" id="lightbox-prev">&#10094;</a>
+        <a class="next" id="lightbox-next">&#10095;</a>
+    </div>
+
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/common.js" type="module"></script>
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initImageAnalysisPage } from '/static/js/image_analysis.js'; // 导入图片解析页面初始化函数
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+            initImageAnalysisPage(); // 调用图片解析页面初始化函数
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,120 @@
+.analysis-results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* 增加主要区域间的间距 */
+    padding: 20px;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 25px;
+}
+
+.original-image-section {
+    /* max-width: 600px; */ /* Removed to allow image to use more space */
+    margin: 0 auto 20px auto;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 30px;
+}
+
+.original-image-section h3 {
+    color: var(--text-color-dark);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.6em;
+}
+
+.original-image-section p {
+    font-size: 0.95em;
+    color: var(--text-color-light);
+    margin: 5px 0;
+}
+
+.original-image-section img {
+    /* Original styles removed to apply new class */
+}
+
+.original-display-thumbnail {
+    width: 600px; /* Fixed width for default display */
+    height: 400px; /* Fixed height for default display */
+    object-fit: contain; /* Ensure the whole image is visible, maintaining aspect ratio */
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin: 20px auto 0 auto;
+}
+
+/* Lightbox specific styles */
+.lightbox-content {
+    max-width: 90vw; /* Max width relative to viewport width */
+    max-height: 90vh; /* Max height relative to viewport height */
+    object-fit: contain; /* Ensure the whole image is visible, maintaining aspect ratio */
+}
+
+.detected-persons-section h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    color: var(--text-color-dark);
+}
+
+.person-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 调整人物卡片网格布局，使卡片更宽 */
+    gap: 30px; /* 增大卡片间距 */
+    justify-content: flex-start;
+    align-items: start;
+    padding: 10px;
+}
+
+.person-card {
+    background-color: var(--bg-color-light);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow-light);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.person-card:hover {
+    transform: translateY(-5px); /* 悬停上浮效果 */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15); /* 悬停阴影增强 */
+}
+
+.person-card img {
+    width: 140px; /* 调整裁剪图宽度 */
+    height: 140px; /* 调整裁剪图高度 */
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.person-card p {
+    font-size: 0.85em;
+    color: var(--text-color-light);
+    margin: 3px 0;
+    word-break: normal; /* 允许正常换行 */
+    white-space: normal; /* 允许正常换行 */
+    overflow: visible; /* 确保内容可见 */
+    text-overflow: clip; /* 禁用省略号 */
+    width: auto; /* 自动宽度 */
+    padding: 0;
+}
+
+/* 针对长UUID的样式 */
+.person-card .uuid-display {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8em;
+    color: var(--text-color-dark-light);
+    /* cursor: help; */ /* 移除问号光标 */
+} 

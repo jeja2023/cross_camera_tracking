@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+
+# Environment variables
+.env
+
+# IDE related files (common)
+.idea/
+.vscode/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Database files
+*.sqlite3
+*.db
+
+# Large data / Uploads / Saved Streams
+backend/database/
+backend/uploads/
+backend/saved_streams/
+backend/uploaded_search_images/
+backend/models/ 
+cross_camera_tracking.egg-info/ 

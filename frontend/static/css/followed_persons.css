@@ -1,0 +1,130 @@
+/* followed_persons.css */
+
+.container {
+    padding: 20px;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.search-bar input[type="text"] {
+    flex-grow: 0.7; /* 让输入框占据更小的比例 */
+    max-width: 300px; /* 设置一个最大宽度，防止过长 */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination-controls button {
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+.action-buttons button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px; /* 增加圆角，使其更圆滑 */
+    cursor: pointer;
+}
+
+.action-buttons .unfollow-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-buttons .unfollow-button:hover {
+    background-color: #c82333;
+}
+
+/* 新增按钮样式 */
+.action-buttons .view-warning-button {
+    background-color: #ffc107; /* 警告色 - 黄色 */
+    color: #333;
+}
+
+.action-buttons .view-warning-button:hover {
+    background-color: #e0a800;
+}
+
+.action-buttons .view-registered-images-button {
+    background-color: #17a2b8; /* 信息色 - 蓝色 */
+    color: white;
+}
+
+.action-buttons .view-registered-images-button:hover {
+    background-color: #138496;
+}
+
+.action-buttons .start-comparison-button {
+    background-color: #6f42c1; /* 紫色 */
+    color: white;
+}
+
+.action-buttons .start-comparison-button:hover {
+    background-color: #563d7c;
+}
+
+.history-button {
+    background-color: #ffc107; /* 黄色，可根据需要调整 */
+}
+
+.history-button:hover {
+    background-color: #e0a800; /* 鼠标悬停时的深色 */
+}
+
+.hidden {
+    display: none !important;
+}
