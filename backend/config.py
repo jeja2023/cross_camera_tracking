@@ -4,6 +4,7 @@ import sys
 from sqlalchemy.orm import Session # 确保导入 Session
 from .database_conn import SessionLocal, SystemConfig # 确保 SystemConfig 在顶部导入
 import logging
+from typing import List # 导入 List 类型
 
 load_dotenv()
 
@@ -247,7 +248,7 @@ class Settings:
         "DETECTION_CONFIDENCE_THRESHOLD", "PERSON_CLASS_ID", "EXCEL_EXPORT_MAX_IMAGES",
         "EXCEL_EXPORT_IMAGE_SIZE_PX", "EXCEL_EXPORT_ROW_HEIGHT_PT", "MJPEG_STREAM_FPS",
         "FAISS_METRIC", "FAISS_SEARCH_K", "REID_TRAIN_BATCH_SIZE", "REID_TRAIN_LEARNING_RATE",
-        "REALTIME_COMPARISON_THRESHOLD", "REALTIME_COMPARISON_MAX_FOLLOWED_PERSONS" # 新增实时比对配置
+        "REALTIME_COMPARISON_THRESHOLD", "REALTIME_COMPARISON_MAX_FOLLOWED_PERSONS", "GLOBAL_SEARCH_MIN_CONFIDENCE" # 新增实时比对配置
     ]
 
     # Ensure directories exist
@@ -796,6 +797,8 @@ class Settings:
         except ValueError:
             print(f"错误：REALTIME_COMPARISON_MAX_FOLLOWED_PERSONS 的值 \'{REALTIME_COMPARISON_MAX_FOLLOWED_PERSONS_STR}\' 无效。必须是一个整数。将使用默认值 100。", file=sys.stderr)
             REALTIME_COMPARISON_MAX_FOLLOWED_PERSONS: int = 100
+
+    GLOBAL_SEARCH_MIN_CONFIDENCE: float = float(os.getenv("GLOBAL_SEARCH_MIN_CONFIDENCE", "0.9")) # 新增：全局搜索最小置信度
 
     # --- 人机回环审核配置 ---
     # HUMAN_REVIEW_CONFIDENCE_THRESHOLD: 人机回环审核时，特征置信度阈值。

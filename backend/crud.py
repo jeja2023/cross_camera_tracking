@@ -577,7 +577,8 @@ def create_person(db: Session, person: schemas.PersonCreate) -> Person:
         gait_feature_vector=person.gait_feature_vector,
         gait_image_path=person.gait_image_path,
         individual_id=individual_id_to_use, # Assign individual_id
-        is_trained=False # 新增：初始化为未训练
+        is_trained=False, # 新增：初始化为未训练
+        is_enrollment_image=person.is_enrollment_image # 新增：保存是否为注册图片的标识
     )
     db.add(db_person)
     db.commit()
@@ -1539,7 +1540,14 @@ def get_enrollment_images_by_individual_id(db: Session, individual_id: int):
     logger.info(f"正在获取 Individual ID {individual_id} 的注册图片。")
     # 获取与该 individual_id 关联的所有人物 (Person) 记录
     # 筛选出 is_verified 为 True 的人物，这些是主动注册的图片
-    persons = db.query(Person).filter(Person.individual_id == individual_id, Person.is_verified == True).all()
+    persons = db.query(Person).filter(
+        Person.individual_id == individual_id,
+        Person.is_verified == True,
+        Person.image_id != None, # 确保是图片上传的
+        Person.video_id == None, # 排除视频分析的
+        Person.stream_id == None, # 排除视频流分析的
+        Person.is_enrollment_image == True # 新增：只选择主动注册的图片
+    ).all()
 
     image_paths_and_uuids = []
     for person in persons:
@@ -1662,7 +1670,14 @@ def get_enrollment_images_by_individual_id(db: Session, individual_id: int):
     logger.info(f"正在获取 Individual ID {individual_id} 的注册图片。")
     # 获取与该 individual_id 关联的所有人物 (Person) 记录
     # 筛选出 is_verified 为 True 的人物，这些是主动注册的图片
-    persons = db.query(Person).filter(Person.individual_id == individual_id, Person.is_verified == True).all()
+    persons = db.query(Person).filter(
+        Person.individual_id == individual_id,
+        Person.is_verified == True,
+        Person.image_id != None, # 确保是图片上传的
+        Person.video_id == None, # 排除视频分析的
+        Person.stream_id == None, # 排除视频流分析的
+        Person.is_enrollment_image == True # 新增：只选择主动注册的图片
+    ).all()
 
     image_paths_and_uuids = []
     for person in persons:

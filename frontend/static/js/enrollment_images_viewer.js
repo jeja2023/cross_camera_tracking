@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    viewerTitle.textContent = `人物档案: ${individualName} (${individualIdCard}) 的注册图片`;
+    viewerTitle.textContent = `${individualName} (${individualIdCard}) 的注册图片`;
 
     const token = Auth.getToken();
     if (!token) {

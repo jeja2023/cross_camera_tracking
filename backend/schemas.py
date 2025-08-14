@@ -135,6 +135,7 @@ class Person(BaseModel):
     correction_type_display: Optional[str] = Field(None, description="最近一次纠正的类型 (用于前端展示)") # 新增：纠正类型显示字段
     uploaded_by_username: Optional[str] = Field(None, description="上传该人物信息的用户") # 新增：上传用户名字段
     is_followed: Optional[bool] = Field(False, description="人物是否被关注") # 新增：关注状态
+    is_enrollment_image: Optional[bool] = Field(False, description="是否为主动注册的图片") # 新增：标识是否为主动注册图片
 
     class Config:
         from_attributes = True # Use alias_generator instead of allow_population_by_field_name
@@ -183,6 +184,7 @@ class PersonCreate(BaseModel):
     id_card: Optional[str] = Field(None, description="可选：关联到的逻辑人物身份证号，用于查找或创建 Individual")
     person_name: Optional[str] = Field(None, description="可选：关联到的逻辑人物姓名，用于创建 Individual (当 id_card 存在时)")
     correction_type_display: Optional[str] = Field(None, description="最近一次纠正的类型 (用于前端展示)") # 新增
+    is_enrollment_image: Optional[bool] = Field(False, description="是否为主动注册的图片") # 新增：标识是否为主动注册图片
 
 class PersonUpdate(BaseModel):
     """
@@ -531,7 +533,8 @@ class ModelConfig(BaseModel):
 
     # 实时比对配置
     REALTIME_COMPARISON_THRESHOLD: Optional[float] = None
-    REALTIME_COMPARISON_MAX_FOLLOWED_PERSONS: Optional[int] = None
+    REALTIME_COMPARISON_MAX_FOLLOWED_PERSONS: int = Field(..., description="实时比对最大关注人数")
+    GLOBAL_SEARCH_MIN_CONFIDENCE: float = Field(..., description="全局搜索最小置信度") # 新增
 
     class Config:
         from_attributes = True
@@ -624,7 +627,7 @@ class GlobalSearchResultBase(BaseModel):
     matched_person_id: int
     matched_image_path: str
     confidence: float
-    search_time: datetime
+    search_time: str
     user_id: int
     is_initial_search: bool
 

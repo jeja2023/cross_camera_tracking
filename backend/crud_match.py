@@ -175,13 +175,23 @@ def get_global_search_results_by_individual_id(
     user_id: int,
     skip: int = 0, # 新增 skip 参数
     limit: int = 100, # 新增 limit 参数
-    min_confidence: Optional[float] = None,
+    # min_confidence: Optional[float] = None, # 移除此行，从系统配置获取
     is_initial_search: Optional[bool] = None,
     last_query_time: Optional[datetime] = None # 新增参数
 ) -> List[schemas.GlobalSearchResultResponse]:
     """
     获取指定人物的全局搜索比对结果，支持分页、置信度筛选和是否初始搜索筛选，并支持基于时间戳的增量查询。
     """
+    
+    # 从系统配置中获取 min_confidence
+    configured_min_confidence = crud.get_system_config(db, 'GLOBAL_SEARCH_MIN_CONFIDENCE')
+    actual_min_confidence = 0.9 # 默认值
+    if configured_min_confidence and configured_min_confidence.value:
+        try:
+            actual_min_confidence = float(configured_min_confidence.value)
+        except ValueError:
+            logger.warning(f"系统配置 GLOBAL_SEARCH_MIN_CONFIDENCE 的值 '{configured_min_confidence.value}' 无效，使用默认值 0.9。")
+
     query = db.query(GlobalSearchResult).options(
         joinedload(GlobalSearchResult.individual),
         joinedload(GlobalSearchResult.person).joinedload(Person.individual), # 急切加载匹配人物及其关联的Individual
@@ -191,8 +201,8 @@ def get_global_search_results_by_individual_id(
         GlobalSearchResult.user_id == user_id
     )
 
-    if min_confidence is not None:
-        query = query.filter(GlobalSearchResult.confidence >= min_confidence)
+    # 使用从配置中获取的 min_confidence
+    query = query.filter(GlobalSearchResult.confidence >= actual_min_confidence)
     
     if last_query_time is not None: # 新增：根据 last_query_time 过滤
         if last_query_time.tzinfo is None: # 如果是 naive datetime，假设为 UTC
@@ -219,7 +229,7 @@ def get_global_search_results_by_individual_id(
             matched_person_id=result_orm.matched_person_id,
             matched_image_path=result_orm.matched_image_path,
             confidence=result_orm.confidence,
-            search_time=result_orm.search_time,
+            search_time=result_orm.search_time.strftime('%Y-%m-%dT%H:%M:%S'),
             user_id=result_orm.user_id,
             is_initial_search=result_orm.is_initial_search,
             individual=schemas.Individual.model_validate(result_orm.individual) if result_orm.individual else None,

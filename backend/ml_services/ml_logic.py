@@ -827,7 +827,7 @@ def find_similar_people(db: Session, query_image_path: Optional[str] = None, thr
 
 
 # --- 静态图片分析函数 ---
-def analyze_image(original_image_uuid: str, original_image_full_path: str, original_image_filename: str, db: Session, current_user: schemas.User, perform_realtime_comparison_flag: bool = True, individual_id_to_link: Optional[int] = None):
+def analyze_image(original_image_uuid: str, original_image_full_path: str, original_image_filename: str, db: Session, current_user: schemas.User, perform_realtime_comparison_flag: bool = True, individual_id_to_link: Optional[int] = None, is_enrollment: bool = False):
     logger.info(f"开始分析静态图片: {original_image_full_path}")
     if not os.path.exists(original_image_full_path):
         logger.error(f"文件不存在或无法访问: {original_image_full_path}")
@@ -928,7 +928,8 @@ def analyze_image(original_image_uuid: str, original_image_full_path: str, origi
                                 # 新增：传递人脸检测和人脸识别模型
                                 face_detection_model=face_detection_model,
                                 face_recognition_session=face_recognition_session,
-                                individual_id=individual_id_to_link # 新增：传递 individual_id_to_link
+                                individual_id=individual_id_to_link, # 新增：传递 individual_id_to_link
+                                is_enrollment_image=is_enrollment # 修改：根据 analyze_image 的 is_enrollment 参数设置
                             )
 
                             # 统一设置审核状态和关联用户，因为这是注册流程
@@ -983,7 +984,7 @@ def analyze_image(original_image_uuid: str, original_image_full_path: str, origi
                                         new_person.verified_by_user_id = current_user.id
                                         new_person.verification_date = datetime.now(pytz.timezone('Asia/Shanghai'))
                                         new_person.correction_details = f"Realtime comparison matched with followed person {matched_followed_person['individual_uuid']} (similarity: {matched_followed_person['similarity']:.2f})"
-                                        new_person.correction_type_display = "已纠正（实时比对）"
+                                        # new_person.correction_type_display = "已纠正（实时比对）" # 根据需求，实时比对不应更新此字段，此字段需人工干预修改
                                         db.add(new_person) # 标记为更新
                                         
                                         # 记录实时比对预警信息
@@ -1131,7 +1132,8 @@ def process_enrollment_image(
         db=db,
         current_user=current_user,
         perform_realtime_comparison_flag=False, # 主动注册时不进行实时比对
-        individual_id_to_link=individual_id_to_link # 传递 Individual ID
+        individual_id_to_link=individual_id_to_link, # 传递 Individual ID
+        is_enrollment=True # 设置为注册流程
     )
 
     # analyze_image 返回的是 image_id，我们需要获取最终创建的人物 UUID
@@ -1214,7 +1216,8 @@ def process_live_frame_and_save_features(
                     track_id=track_id,
                     model_name="person_reid", # 修改为人体识别
                     face_detection_model=face_detection_model, # 新增
-                    face_recognition_session=face_recognition_session # 新增
+                    face_recognition_session=face_recognition_session, # 新增
+                    is_enrollment_image=False # 新增：明确标记为非主动注册图片
                 )
                 
                 # 在保存人物之前进行实时比对
@@ -1254,7 +1257,7 @@ def process_live_frame_and_save_features(
                         person_create_data.verified_by_user_id = stream_owner.id if stream_owner else None
                         person_create_data.verification_date = datetime.now(pytz.timezone('Asia/Shanghai'))
                         person_create_data.correction_details = f"Realtime comparison matched with followed person {matched_followed_person['individual_uuid']} (similarity: {matched_followed_person['similarity']:.2f})"
-                        person_create_data.correction_type_display = "已纠正（实时比对）"
+                        # person_create_data.correction_type_display = "已纠正（实时比对）" # 根据需求，实时比对不应更新此字段，此字段需人工干预修改
 
                         # 记录实时比对预警信息
                         alert_data = schemas.RealtimeMatchAlert(

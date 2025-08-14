@@ -239,7 +239,7 @@ async def get_followed_person_global_search_results(
     individual_id: int,
     skip: int = Query(0, ge=0, description="跳过的记录数"),
     limit: int = Query(100, ge=1, description="返回的记录数限制"),
-    min_confidence: Optional[float] = Query(0.9, ge=0.0, le=1.0, description="最低置信度阈值"),
+    # min_confidence: Optional[float] = Query(0.9, ge=0.0, le=1.0, description="最低置信度阈值"), # 已移除，从系统配置获取
     is_initial_search: Optional[bool] = Query(None, description="是否只返回初始搜索结果"),
     last_query_time: Optional[datetime] = Query(None, description="上次查询时间，用于增量查询"), # 新增参数
     db: Session = Depends(get_db),
@@ -257,7 +257,7 @@ async def get_followed_person_global_search_results(
         user_id=user_id,
         skip=skip, # 传递 skip 参数
         limit=limit, # 传递 limit 参数
-        min_confidence=min_confidence,
+        # min_confidence=min_confidence, # 已移除，从系统配置获取
         is_initial_search=is_initial_search,
         last_query_time=last_query_time # 传递新增参数
     )
@@ -265,7 +265,7 @@ async def get_followed_person_global_search_results(
         db=db,
         individual_id=individual_id,
         user_id=user_id,
-        min_confidence=min_confidence,
+        # min_confidence=min_confidence, # 已移除，从系统配置获取
         is_initial_search=is_initial_search,
         last_query_time=last_query_time # 传递新增参数
     )

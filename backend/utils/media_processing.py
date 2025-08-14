@@ -155,7 +155,8 @@ def process_detected_person_data(
     track_id: Optional[int] = None,
     full_frame_image_path_override: Optional[str] = None, # NEW PARAMETER
     original_filename: Optional[str] = None, # NEW PARAMETER
-    model_name: Optional[str] = None # 新增参数
+    model_name: Optional[str] = None, # 新增参数
+    is_enrollment_image: bool = False # 新增：标识是否为主动注册图片
 ) -> Optional[schemas.PersonCreate]:
     """
     处理单个检测到的人物数据，提取特征，保存裁剪图，并生成 PersonCreate 模式。
@@ -376,6 +377,7 @@ def process_detected_person_data(
         is_verified=True if media_type == "image" else False, 
         verified_by_user_id=None,
         verification_date=datetime.now() if media_type == "image" else None, 
+        is_enrollment_image=is_enrollment_image # 新增：传递 is_enrollment_image
     )
     logger.debug(f"已创建 PersonCreate 对象，UUID: {person_create_data.uuid}")
     return person_create_data 

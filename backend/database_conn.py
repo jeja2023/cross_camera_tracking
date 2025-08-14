@@ -159,6 +159,8 @@ class Person(Base):
     correction_type_display = Column(String(255), nullable=True) # 新增：最近一次纠正的类型 (用于前端展示)
     is_followed = Column(Boolean, default=False) # 新增：是否被关注
 
+    is_enrollment_image = Column(Boolean, default=False, comment="是否为主动注册的图片") # 新增：标识是否为主动注册图片
+
     # 新增 individual_id 外键
     individual_id = Column(Integer, ForeignKey("individuals.id"), nullable=True)
     individual = relationship("Individual", back_populates="persons")

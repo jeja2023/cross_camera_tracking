@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             viewRegisteredImagesButton.classList.add('view-registered-images-button');
             viewRegisteredImagesButton.onclick = () => {
                 if (person.individual && person.individual.id) {
-                    // 重定向到新的图片查看页面，并传递 individual_id, name, id_card
-                    window.location.href = `/enrollment_images_viewer?individual_id=${person.individual.id}&individual_name=${encodeURIComponent(person.individual.name)}&individual_id_card=${encodeURIComponent(person.individual.id_card)}`;
+                    const url = `/enrollment_images_viewer?individual_id=${person.individual.id}&individual_name=${encodeURIComponent(person.individual.name)}&individual_id_card=${encodeURIComponent(person.individual.id_card)}`;
+                    window.open(url, '_blank');
                 } else {
                     alert("无法获取人物档案ID。");
                 }
@@ -109,7 +109,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             historyButton.classList.add('history-button');
             historyButton.onclick = () => {
                 if (person.individual && person.individual.id) {
-                    window.location.href = `/followed_person_history.html?individual_id=${person.individual.id}&individual_name=${encodeURIComponent(person.individual.name)}`;
+                    const url = `/followed_person_history.html?individual_id=${person.individual.id}&individual_name=${encodeURIComponent(person.individual.name)}&individual_id_card=${encodeURIComponent(person.individual.id_card)}`;
+                    window.open(url, '_blank');
                 } else {
                     alert("无法获取人物档案ID。");
                 }
@@ -122,8 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             viewWarningButton.classList.add('view-warning-button');
             viewWarningButton.onclick = () => {
                 if (person.individual && person.individual.id) {
-                    // 将 individual.id 作为 id 参数传递，将 individual.name 作为 name 参数传递
-                    window.location.href = `/followed_person_alerts.html?id=${person.individual.id}&name=${encodeURIComponent(person.individual.name)}`;
+                    window.open(`/followed_person_alerts.html?id=${person.individual.id}&name=${encodeURIComponent(person.individual.name)}&id_card=${encodeURIComponent(person.individual.id_card)}`, '_blank');
                 } else {
                     alert("无法获取人物档案ID。");
                 }

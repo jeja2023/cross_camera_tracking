@@ -64,7 +64,8 @@ async def get_model_configs(
                     "ENROLLMENT_MIN_PERSON_CONFIDENCE", "FACE_DETECTION_CONFIDENCE_THRESHOLD",
                     "TRACKER_PROXIMITY_THRESH", "TRACKER_APPEARANCE_THRESH", "TRACKER_HIGH_THRESH",
                     "TRACKER_LOW_THRESH", "TRACKER_NEW_TRACK_THRESH", "DETECTION_CONFIDENCE_THRESHOLD",
-                    "REID_TRAIN_LEARNING_RATE"]:
+                    "REID_TRAIN_LEARNING_RATE", "REALTIME_COMPARISON_THRESHOLD",
+                    "GLOBAL_SEARCH_MIN_CONFIDENCE"]: # 新增：全局搜索最小置信度
             configs[key] = float(value) if value else 0.0
         elif key == "DEVICE_TYPE": # DEVICE_TYPE 是字符串
             configs[key] = str(value) if value else "cpu"

@@ -292,7 +292,8 @@ def process_video_for_extraction_task(self, video_path: str, video_id: int):
                             face_detection_model=face_detection_model_instance,
                             face_recognition_session=face_recognition_session_instance,
                             gait_recognition_session=gait_recognition_session_instance, # 如果为None，则传递None
-                            track_id=track_id # 确保 track_id 也被传递
+                            track_id=track_id, # 确保 track_id 也被传递
+                            is_enrollment_image=False # 新增：明确标记为非主动注册图片
                         )
 
                         # 在创建 real_time_match_alert 之前，立即创建并提交 person 对象
@@ -332,7 +333,7 @@ def process_video_for_extraction_task(self, video_path: str, video_id: int):
                                 person_obj.verified_by_user_id = video_owner.id
                                 person_obj.verification_date = datetime.now(pytz.timezone('Asia/Shanghai'))
                                 person_obj.correction_details = f"Realtime comparison matched with followed person {matched_followed_person['individual_uuid']} (similarity: {matched_followed_person['similarity']:.2f})"
-                                person_obj.correction_type_display = "已纠正（实时比对）"
+                                # person_obj.correction_type_display = "已纠正（实时比对）" # 根据需求，实时比对不应更新此字段，此字段需人工干预修改
                                 
                                 # 更新已创建的人物对象（在同一个事务中）
                                 backend.crud.update_person(db, person_id=created_person.id, person_update_data=schemas.PersonUpdate(**person_obj.dict()))
@@ -715,7 +716,8 @@ def process_live_stream_task(self, stream_id: int, stream_url: str):
                                 gait_recognition_session=gait_recognition_session_instance, # 如果为None，则传递None
                                 tracklet_gait_buffer=tracklet_gait_buffer, track_id=track_id,
                                 face_detection_model=face_detection_model_instance, # 新增
-                                face_recognition_session=face_recognition_session_instance # 新增
+                                face_recognition_session=face_recognition_session_instance, # 新增
+                                is_enrollment_image=False # 新增：明确标记为非主动注册图片
                             )
                             if person_create_data:
                                 created_person = backend.crud.create_person(db, person=person_create_data)
@@ -750,7 +752,6 @@ def process_live_stream_task(self, stream_id: int, stream_url: str):
                                         created_person.verified_by_user_id = stream_owner.id
                                         created_person.verification_date = datetime.now(pytz.timezone('Asia/Shanghai'))
                                         created_person.correction_details = f"Realtime comparison matched with followed person {matched_followed_person['individual_uuid']} (similarity: {matched_followed_person['similarity']:.2f})"
-                                        created_person.correction_type_display = "已纠正（实时比对）"
                                         
                                         # 更新已创建的人物对象（在同一个事务中）
                                         person_update_data = schemas.PersonUpdate(
@@ -758,8 +759,7 @@ def process_live_stream_task(self, stream_id: int, stream_url: str):
                                             is_verified=created_person.is_verified,
                                             verified_by_user_id=created_person.verified_by_user_id,
                                             verification_date=created_person.verification_date,
-                                            correction_details=created_person.correction_details,
-                                            correction_type_display=created_person.correction_type_display
+                                            correction_details=created_person.correction_details
                                         )
                                         backend.crud.update_person(db, person_id=created_person.id, person_update_data=person_update_data)
                                         db.commit() # 提交人物更新
@@ -982,14 +982,14 @@ def run_global_search_for_followed_person(self, individual_id: int, user_id: int
             
             try:
                 # 提取特征向量
-                img_to_process = cv2.imread(os.path.join(settings.BASE_DIR, image_path.lstrip('/'))) # 移除开头的斜杠
+                img_to_process = cv2.imread(os.path.join(settings.BASE_DIR, image_path['path'].lstrip('/')))
                 if img_to_process is None:
-                    logger.warning(f"无法读取图片 {image_path}，跳过。")
+                    logger.warning(f"无法读取图片 {image_path['path']}，跳过。")
                     continue
 
                 feature_vector = ml_logic.get_person_feature(reid_session, img_to_process)
                 if feature_vector is None:
-                    logger.warning(f"无法从图片 {image_path} 提取特征，跳过。")
+                    logger.warning(f"无法从图片 {image_path['path']} 提取特征，跳过。")
                     continue
 
                 # 使用 Faiss 索引进行搜索

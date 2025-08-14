@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     const followedPersonId = params.get('id');
     const personName = params.get('name');
+    const personIdCard = params.get('id_card'); // 新增：获取身份证号
 
     if (!followedPersonId) {
         console.error('未提供 followedPersonId。');
@@ -18,7 +19,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    document.getElementById('individual-name-display').textContent = personName || '未知人员';
+    const individualNameDisplay = document.getElementById('individual-name-display');
+    const individualIdCardDisplay = document.getElementById('individual-id-card-display'); // 获取身份证号显示元素
+
+    if (individualNameDisplay) {
+        individualNameDisplay.textContent = personName || '未知人员';
+    }
+    if (individualIdCardDisplay && personIdCard) {
+        individualIdCardDisplay.textContent = personIdCard;
+    } else if (individualIdCardDisplay) {
+        individualIdCardDisplay.textContent = ''; // 如果没有身份证号，则清空
+    }
 
     // 移除查询相关的 DOM 元素获取，因为它们将被隐藏
     // const queryAlertsButton = document.getElementById('query-alerts-button');

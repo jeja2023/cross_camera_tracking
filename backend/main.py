@@ -135,7 +135,6 @@ async def log_context_middleware(request: Request, call_next):
     return response
 
 # 应用启动时创建数据表并初始化默认管理员账户
-@app.on_event("startup")
 async def startup_event():
     logger.info("应用启动中...")
     try:
@@ -204,6 +203,24 @@ async def startup_event():
         db_check.close()
     except Exception as e:
         logger.error(f"检查 'persons' 表结构失败: {e}", exc_info=True)
+
+    # Initialize default system configurations if they don't exist
+    db = SessionLocal()
+    try:
+        # Set default for GLOBAL_SEARCH_MIN_CONFIDENCE
+        global_search_confidence_config = crud.get_system_config(db, 'GLOBAL_SEARCH_MIN_CONFIDENCE')
+        if not global_search_confidence_config:
+            crud.set_system_config(db, 'GLOBAL_SEARCH_MIN_CONFIDENCE', '0.9')
+            logger.info("Initialized default GLOBAL_SEARCH_MIN_CONFIDENCE to 0.9.")
+        else:
+            logger.info(f"GLOBAL_SEARCH_MIN_CONFIDENCE already set to {global_search_confidence_config.value}.")
+
+    except Exception as e:
+        logger.error(f"Failed to initialize default system configurations: {e}", exc_info=True)
+    finally:
+        db.close()
+
+app.add_event_handler("startup", startup_event)
 
 # Configure CORS
 app.add_middleware(

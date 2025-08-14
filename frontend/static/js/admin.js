@@ -154,7 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "REID_TRAIN_BATCH_SIZE": "Re-ID训练批量大小",
             "REID_TRAIN_LEARNING_RATE": "Re-ID训练学习率",
             "REALTIME_COMPARISON_THRESHOLD": "实时比对阈值",
-            "REALTIME_COMPARISON_MAX_FOLLOWED_PERSONS": "实时比对最大关注人数"
+            "REALTIME_COMPARISON_MAX_FOLLOWED_PERSONS": "实时比对最大关注人数",
+            "GLOBAL_SEARCH_MIN_CONFIDENCE": "全局搜索最小置信度"
         };
 
         const categories = {
@@ -169,7 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "设备与阈值": ["DEVICE_TYPE", "HUMAN_REVIEW_CONFIDENCE_THRESHOLD", 
                        "IMAGE_ANALYSIS_MIN_PERSON_CONFIDENCE", "ENROLLMENT_MIN_PERSON_CONFIDENCE",
                        "FACE_DETECTION_CONFIDENCE_THRESHOLD", "MIN_FACE_WIDTH", "MIN_FACE_HEIGHT",
-                       "DETECTION_CONFIDENCE_THRESHOLD", "PERSON_CLASS_ID"],
+                       "DETECTION_CONFIDENCE_THRESHOLD", "PERSON_CLASS_ID",
+                       "GLOBAL_SEARCH_MIN_CONFIDENCE"],
             "追踪器配置": ["TRACKER_PROXIMITY_THRESH", "TRACKER_APPEARANCE_THRESH", 
                        "TRACKER_HIGH_THRESH", "TRACKER_LOW_THRESH", 
                        "TRACKER_NEW_TRACK_THRESH", "TRACKER_MIN_HITS", "TRACKER_TRACK_BUFFER"],

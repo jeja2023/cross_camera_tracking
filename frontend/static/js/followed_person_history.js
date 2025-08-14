@@ -15,11 +15,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const individualId = urlParams.get('individual_id');
     const individualName = urlParams.get('individual_name');
+    const individualIdCard = urlParams.get('individual_id_card'); // 新增：获取身份证号
 
     if (individualName) {
         individualNameDisplay.textContent = individualName;
     } else {
         individualNameDisplay.textContent = '未知人物';
+    }
+
+    const individualIdCardDisplay = document.getElementById('individual-id-card-display'); // 获取身份证号显示元素
+    if (individualIdCardDisplay && individualIdCard) {
+        individualIdCardDisplay.textContent = individualIdCard;
+    } else if (individualIdCardDisplay) {
+        individualIdCardDisplay.textContent = ''; // 如果没有身份证号，则清空
     }
 
     let currentSelectedIndividualId = individualId; // Initialize with ID from URL
@@ -52,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         try {
-            let url = `/followed_persons/${individualId}/global_search_results?min_confidence=0.9&skip=${skip}&limit=${limit}`;
+            let url = `/followed_persons/${individualId}/global_search_results?skip=${skip}&limit=${limit}`;
             if (isInitialSearch !== null) {
                 url += `&is_initial_search=${isInitialSearch}`;
             }
@@ -94,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         historyResultsSection.classList.remove('hidden'); // Ensure section is visible
 
         if (allDisplayedResults.length === 0) {
-            historyMessage.textContent = `人物 ${individualNameDisplay.textContent} 没有找到相关历史轨迹结果。`;
+            historyMessage.textContent = `人物 ${individualNameDisplay.textContent} (${individualIdCardDisplay.textContent}) 没有找到相关历史轨迹结果。`;
             return;
         }
 
@@ -274,6 +282,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // Always re-render based on current page and accumulated results
         renderGlobalSearchResults(currentSelectedIndividualId);
+
+        // Update lastQueryTime to the current time if the fetch was successful
+        // This ensures the "最近查询时间" is always updated after a search attempt, even if no new results are found.
+        lastQueryTime = new Date();
+        localStorage.setItem(`lastQueryTime_${currentSelectedIndividualId}`, lastQueryTime.toISOString());
+        updateLastQueryTimeDisplay();
     }
 
     queryHistoryButton.addEventListener('click', async () => {
