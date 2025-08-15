@@ -1,0 +1,210 @@
+/* styles for followed_person_alerts.html */
+
+/* Lightbox specific styles - Overrides common.css .modal-content */
+.modal-content {
+    max-width: 90%; /* 或其他合适的值 */
+    max-height: 90vh; /* 限制高度为视口高度的90% */
+    display: block; /* 确保图片居中 */
+    margin: auto; /* 确保图片居中 */
+    object-fit: contain; /* 保持图片宽高比并适应容器 */
+}
+
+/* Page Layout */
+main {
+    padding: 20px;
+}
+
+.content-section {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.history-results-section {
+    padding: 0 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.message-area {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.1em;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* Results Grid */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Adjusted for slightly larger cards */
+    gap: 25px;
+    margin-top: 25px;
+    padding: 0; /* Remove padding as it's handled by content-section */
+}
+
+.result-item {
+    background-color: #fefefe;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex; /* Use flexbox for internal layout */
+    flex-direction: column; /* Stack image and info vertically */
+    justify-content: space-between; /* Space out content */
+    height: 100%; /* Ensure all cards are same height */
+}
+
+.result-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.result-item .thumbnail {
+    max-width: 100%;
+    height: 200px; /* Increased height for better visibility */
+    object-fit: cover; /* Crop to fit, maintain aspect ratio */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: block;
+    width: 100%; /* Ensure thumbnail takes full width */
+    cursor: pointer;
+}
+
+.info-section {
+    text-align: left;
+    font-size: 0.9em;
+    color: #555;
+    flex-grow: 1; /* Allow info section to grow */
+}
+
+/* Other info-section p styles */
+.info-section p {
+    margin: 5px 0;
+    word-break: break-word;
+}
+
+.info-section p strong {
+    color: #333;
+}
+
+.similarity-score {
+    font-weight: bold;
+    color: #28a745; /* 例如，绿色表示高相似度 */
+    font-size: 1.1em;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* Lightbox navigation buttons (using common.css styles for .prev, .next) */
+/* Only specific overrides or new styles for this page's lightbox */
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 1002; /* Ensure close button is above image */
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #bbb;
+}
+
+#image-info {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1.1em;
+    background-color: rgba(0,0,0,0.7);
+    padding: 10px 20px;
+    border-radius: 8px;
+    max-width: 80%;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .content-section {
+        padding: 20px;
+        margin: 15px auto;
+    }
+
+    h2 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+
+    .results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+    }
+
+    .result-item .thumbnail {
+        height: 150px;
+    }
+
+    /* Remove modal-nav-button specific styles for smaller screens, rely on common.css */
+
+    .lightbox-close {
+        font-size: 30px;
+        top: 10px;
+        right: 15px;
+    }
+
+    #image-info {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-section {
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    h2 {
+        font-size: 1.4em;
+        margin-bottom: 15px;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr; /* Stack items on very small screens */
+        gap: 15px;
+    }
+
+    .result-item .thumbnail {
+        height: 120px;
+    }
+
+    .lightbox-close {
+        font-size: 24px;
+    }
+
+    #image-info {
+        font-size: 0.8em;
+        padding: 5px 10px;
+    }
+}

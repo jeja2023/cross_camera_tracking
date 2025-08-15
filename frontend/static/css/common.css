@@ -1,0 +1,595 @@
+/* 全局盒模型重置 */
+html {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* 全局和基本样式 */
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 0; line-height: 1.6; }
+.container { max-width: 1400px; margin: 20px auto; padding: 0 20px; }
+h1, h2, h3 { color: #2c3e50; text-align: center; }
+h1 { margin-top: 0; } /* Added to normalize heading margin across pages */
+h3 { margin-top: 40px; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px; }
+.card { background-color: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 25px 40px; margin-bottom: 30px; }
+button, .button { background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; transition: all 0.3s ease; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+button:hover, .button:hover { background-color: #2980b9; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+button:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+.button.info {
+    background-color: #3498db; /* 蓝色 */
+    color: white;
+}
+
+.button.info:hover {
+    background-color: #2980b9; /* 深蓝色 */
+}
+.hidden { display: none !important; }
+input[type="file"] { display: none; }
+select { padding: 8px; border-radius: 5px; border: 1px solid #ccc; min-width: 200px; background-color: #fff; }
+.upload-label { display: inline-block; padding: 10px 20px; border: 1px solid #3498db; color: #3498db; border-radius: 5px; cursor: pointer; font-weight: 500; }
+
+/* 头部导航栏样式 */
+.header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px 40px;
+    min-height: 60px; /* 确保导航栏的最小高度一致 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 17px;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.header nav a:hover {
+    color: #3498db;
+}
+
+.header nav a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 3px;
+    background-color: #3498db;
+    border-radius: 2px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 15px;
+}
+
+.user-info span, .user-info button, .user-info .home-button, .user-info .logout-button {
+    vertical-align: middle;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.user-info .admin-button {
+    background-color: #27ae60; /* 绿色按钮 */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-decoration: none; /* 移除下划线 */
+    display: inline-block; /* 确保它像块级元素一样可以设置内边距和外边距 */
+}
+
+.user-info .admin-button:hover {
+    background-color: #229954;
+}
+
+.user-info .home-button {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.user-info .home-button:hover {
+    background-color: #e67e22;
+}
+
+.user-info button {
+    background-color: #f39c12;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.user-info button:hover {
+    background-color: #e67e22;
+}
+
+.header-controls { text-align: right; margin-bottom: -40px; }
+.logout-button { background-color: #f39c12; font-size: 14px; padding: 8px 16px; }
+.logout-button:hover { background-color: #e67e22; }
+
+/* 模态框样式 */
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 固定定位 */
+    z-index: 1001; /* 放置在最上层 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 全宽 */
+    height: 100%; /* 全高 */
+    overflow: auto; /* 如果内容溢出，则允许滚动 */
+    background-color: rgba(0,0,0,0.6); /* 黑色背景，带透明度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content button[type="submit"] {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 18px;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 错误消息样式 */
+.error-message, .status-text.error { /* 针对错误消息的颜色 */
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* 成功消息样式 */
+.status-text.success { /* 针对成功消息的颜色 */
+    color: #28a745; /* 绿色 */
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* 信息消息样式 */
+.status-text.info { /* 针对信息消息的颜色 */
+    color: #17a2b8; /* 浅蓝色 */
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* 结果网格 (通用结果显示样式) */
+.results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; margin-top: 20px; min-height: 50px; }
+.result-item { border: 1px solid #ddd; border-radius: 5px; padding: 10px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.result-item img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; cursor: pointer; }
+.result-item p { margin: 8px 0 0; font-size: 14px; color: #555; word-break: break-all; }
+
+/* 加载动画 */
+#loading-indicator, #video-persons-loading, #all-persons-loading { text-align: center; padding: 40px; color: #7f8c8d; }
+.spinner { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 10px; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Lightbox 模态窗口 */
+#lightbox { position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; cursor: pointer; }
+.lightbox-content { margin: auto; display: block; max-width: 85%; max-height: 85%; cursor: default; }
+.lightbox-close { position: absolute; top: 20px; right: 40px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; }
+.lightbox-close:hover, .lightbox-close:focus { color: #bbb; text-decoration: none; cursor: pointer; }
+
+/* Lightbox 导航箭头 */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 28px;
+    transition: 0.6s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: rgba(0,0,0,0.5);
+    text-decoration: none;
+}
+
+.prev {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* 进度条样式 */
+.progress-container { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.progress-container progress { width: 100%; height: 8px; border-radius: 4px; border: none; }
+.progress-container progress::-webkit-progress-bar { background-color: #ecf0f1; border-radius: 4px; }
+.progress-container progress::-webkit-progress-value { background-color: #3498db; border-radius: 4px; transition: width 0.2s ease-in-out; }
+.progress-container progress::-moz-progress-bar { background-color: #3498db; border-radius: 4px; } 
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Center the modal vertically and horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h2 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.modal form {
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.modal form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+.modal form input[type="text"],
+.modal form input[type="email"],
+.modal form input[type="password"] {
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-size: 16px;
+}
+
+.modal form button {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.modal form button:hover {
+    background-color: #2980b9;
+} 
+
+/* 通用表格样式 */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden; /* 确保圆角在表格内部也生效 */
+}
+
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    text-align: center; /* 修改为居中对齐 */
+    font-size: 15px;
+    vertical-align: middle; /* 将内容垂直居中 */
+}
+
+.data-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.data-table tbody tr:hover {
+    background-color: #eef;
+    cursor: pointer;
+}
+
+/* 响应式表格 */
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* 通用操作按钮容器样式 */
+.actions-buttons-container {
+    display: flex;
+    justify-content: center; /* 将按钮居中 */
+    align-items: center; /* 垂直居中 */
+    gap: 10px; /* 按钮之间的间距 */
+    /* margin-top: 10px; */ /* 如果需要在操作按钮容器上方添加间距，可以取消注释 */
+} 
+
+/* Pagination Controls (Unified Styling) */
+.pagination-controls, .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px; /* Consistent spacing from content */
+    margin-bottom: 30px; /* Consistent spacing to bottom of page/next section */
+    gap: 12px; /* Space between buttons */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.pagination-button, .pagination button {
+    padding: 10px 20px; /* Consistent padding */
+    border: 1px solid #3498db; /* Blue border */
+    border-radius: 6px; /* Slightly rounded corners */
+    background-color: #3498db; /* Blue background */
+    color: white; /* White text */
+    cursor: pointer;
+    font-size: 16px; /* Consistent font size */
+    font-weight: 600; /* Bolder text */
+    transition: all 0.3s ease; /* Smooth transitions for hover/focus */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+    min-width: 90px; /* Ensure minimum width for buttons */
+    text-align: center;
+    text-decoration: none; /* Ensure no underline for anchor-like buttons */
+}
+
+.pagination-button:hover, .pagination button:hover:not(:disabled) {
+    background-color: #2980b9; /* Darker blue on hover */
+    border-color: #2980b9;
+    transform: translateY(-1px); /* Slight lift effect */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+}
+
+.pagination-button:disabled, .pagination button:disabled {
+    background-color: #cccccc; /* Grey for disabled */
+    border-color: #cccccc;
+    color: #666; /* Darker text for disabled */
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Page Info (if present) */
+.pagination #page-info, .pagination-controls #current-page-info {
+    font-size: 1.1em;
+    color: #555;
+    margin: 0 10px; /* Space around page info */
+    white-space: nowrap; /* Prevent page info from wrapping */
+} 
+
+/* 新增或修改：针对模型训练进度模态框的样式优化 */
+#retrain-progress-modal .modal-content {
+    max-width: 600px; /* 调整模态框最大宽度 */
+    padding: 30px; /* 增加内边距 */
+}
+
+#retrain-progress-bar {
+    height: 30px; /* 增加进度条高度 */
+    line-height: 30px; /* 使文本垂直居中 */
+    font-size: 16px; /* 调整字体大小 */
+    font-weight: bold;
+    text-align: center; /* 文本居中 */
+    color: white; /* 确保文字颜色可见 */
+    border-radius: 5px; /* 保持圆角 */
+}
+
+#retrain-status-text {
+    font-size: 18px; /* 调整状态文本字体大小 */
+    margin-top: 15px; /* 增加与进度条的间距 */
+    text-align: center; /* 文本居中 */
+    color: #333; /* 确保文字颜色 */
+    font-weight: bold;
+} 
+
+/* 注册图片模态框样式 */
+#enrollmentImagesModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1002; /* Sit on top, higher than other modals if any */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+#enrollmentImagesModal .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0; /* Remove padding here as it's in header/body */
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 800px; /* Wider modal for images */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    display: flex; /* Flex container for header and body */
+    flex-direction: column;
+    max-height: 90vh; /* Limit modal height */
+}
+
+#enrollmentImagesModal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f2f2f2;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#enrollmentImagesModalTitle {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+    text-align: left; /* Align title to left */
+    flex-grow: 1; /* Allow title to take available space */
+}
+
+#enrollmentImagesModal .close-button {
+    color: #aaa;
+    font-size: 36px;
+    font-weight: bold;
+    position: relative; /* Override absolute position in general modal style */
+    top: auto;
+    right: auto;
+    cursor: pointer;
+    margin-left: 20px; /* Space between title and close button */
+}
+
+#enrollmentImagesModal .close-button:hover,
+#enrollmentImagesModal .close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+#enrollmentImagesModalBody {
+    padding: 20px 30px;
+    overflow-y: auto; /* Make body scrollable */
+    display: grid; /* Use grid for image layout */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Gap between grid items */
+    flex-grow: 1; /* Allow body to grow and take available space */
+}
+
+.enrollment-image-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.enrollment-image-item img {
+    max-width: 100%;
+    height: 120px; /* Fixed height for consistency */
+    object-fit: cover; /* Crop to fit, maintain aspect ratio */
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd; /* Subtle border for images */
+}
+
+.enrollment-image-item .image-filename {
+    font-size: 12px;
+    color: #555;
+    word-break: break-all; /* Break long filenames */
+    margin: 0;
+} 

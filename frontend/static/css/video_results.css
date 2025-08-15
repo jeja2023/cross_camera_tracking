@@ -1,0 +1,68 @@
+/* video_results 页面特定样式 */
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+    padding: 15px;
+}
+
+.result-item {
+    background-color: #fefefe;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left; /* 确保所有文本靠左对齐 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.result-item img {
+    max-width: 100%;
+    width: 100%; /* Ensure it takes full width of its parent */
+    height: 180px; /* Set a fixed height */
+    object-fit: contain; /* Keep the entire image visible, fit within the box */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: block; /* Ensures image takes up full width and no extra space */
+}
+
+.result-item p {
+    margin: 5px 0; /* 调整段落间距 */
+    color: #555;
+    font-size: 0.9em;
+    word-break: break-word; /* 确保长文本换行 */
+    text-align: left; /* 明确左对齐段落 */
+}
+
+.result-item .time-info-small {
+    font-size: 0.85em; /* 调整字体大小以适应单行显示 */
+    white-space: nowrap; /* 防止文本换行 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+    }
+    .result-item {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .results-grid {
+        grid-template-columns: 1fr; /* Stack items on very small screens */
+        gap: 15px;
+    }
+    .result-item {
+        padding: 10px;
+    }
+} 

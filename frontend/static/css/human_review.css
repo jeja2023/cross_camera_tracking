@@ -1,0 +1,385 @@
+/* frontend/static/css/human_review.css */
+
+/* Main layout */
+/* 移除原有的 main, sidebar, content 样式，因为它们已被 html 结构替代 */
+/* main {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    gap: 20px;
+}
+
+.sidebar {
+    flex: 0 0 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.content {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+} */
+
+/* 容器内的主内容区样式，与 admin.css 保持一致 */
+#human-review-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 20px; /* 与 header 保持一定距离 */
+}
+
+/* Filter controls 样式，与 admin.css 中的 .log-filters 或 .user-filters 保持一致 */
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    align-items: flex-end; /* 让按钮和下拉框底部对齐 */
+}
+
+.filter-controls label {
+    font-weight: bold;
+    color: #555;
+    margin-right: 5px;
+}
+
+.filter-controls select,
+.filter-controls input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* 移除 flex: 1; 以防止宽度过长，让其根据内容自适应或通过 max-width 控制 */
+    /* flex: 1; */
+    min-width: 150px; /* 最小宽度，防止过窄 */
+    max-width: 180px; /* 限制最大宽度，使其更紧凑 */
+}
+
+.filter-controls button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+.filter-controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Person grid */
+.person-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.person-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+.person-card:hover {
+    transform: translateY(-5px);
+}
+
+.person-card img {
+    width: 100%;
+    height: 180px; /* Fixed height for images */
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    display: block;
+}
+
+.person-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.person-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.person-info p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.person-actions {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.person-actions button {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+.person-actions .btn-verify {
+    background-color: #28a745;
+    color: white;
+}
+
+.person-actions .btn-verify:hover {
+    background-color: #218838;
+}
+
+.person-actions .btn-correct {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.person-actions .btn-correct:hover {
+    background-color: #e0a800;
+}
+
+.person-actions .btn-retrain {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.person-actions .btn-retrain:hover {
+    background-color: #138496;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.pagination button {
+    padding: 8px 15px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.pagination button:disabled {
+    background-color: #cccccc;
+    border-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.pagination #page-info {
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 固定定位 */
+    z-index: 1000; /* 放置在最上层 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 全宽 */
+    height: 100%; /* 全高 */
+    overflow: auto; /* 如果内容过多，允许滚动 */
+    background-color: rgba(0,0,0,0.4); /* 半透明背景 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* 居中 */
+    padding: 30px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 90%; /* 模态框宽度 */
+    max-width: 500px; /* 最大宽度 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 阴影效果 */
+    position: relative; /* 相对定位，用于关闭按钮 */
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* 确保内边距和边框包含在宽度内 */
+    font-size: 1em;
+}
+
+.form-group textarea {
+    resize: vertical; /* 允许垂直方向调整大小 */
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button#submit-correction-button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button#submit-correction-button:hover {
+    background-color: #0056b3;
+} 
+
+/* 人物状态颜色 */
+.person-info .status.unverified {
+    color: #dc3545; /* 红色 */
+    font-weight: bold;
+}
+
+.person-info .status.verified {
+    color: #28a745; /* 绿色 */
+    font-weight: bold;
+}
+
+.person-info .status.marked-for-retrain {
+    color: #ffc107; /* 橙色 */
+    font-weight: bold;
+} 
+
+/* 新增：已训练状态颜色 */
+.person-info .status.trained {
+    color: #007bff; /* 蓝色，与按钮颜色一致，表示稳定状态 */
+    font-weight: bold;
+}
+
+/* 纠正状态样式 */
+.person-card .status.corrected {
+    background-color: #ff9800; /* 橙色 */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+/* 新增：已合并确认状态样式 */
+.person-info .status.merged-confirmed {
+    background-color: #28a745; /* 绿色，表示积极的确认 */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+/* 大图模态框样式 */
+.large-image-modal {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 固定定位 */
+    z-index: 2000; /* 确保在大图模态框之上 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8); /* 更深的半透明背景 */
+    align-items: center;
+    justify-content: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    display: block;
+    margin: auto;
+}
+
+.large-image-modal .close-large-image {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.large-image-modal .close-large-image:hover,
+.large-image-modal .close-large-image:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+} 

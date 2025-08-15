@@ -1,0 +1,78 @@
+.image-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.image-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.image-item img {
+    width: 100%;
+    height: 200px; /* 固定高度，保持图片大小一致 */
+    object-fit: cover; /* 裁剪图片以适应容器，保持比例 */
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.image-info {
+    padding: 15px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.image-info p {
+    margin: 0 0 5px 0;
+    line-height: 1.4;
+}
+
+.image-info p:last-child {
+    margin-bottom: 0;
+}
+
+/* 筛选控制样式 */
+.filter-controls {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-controls label {
+    font-weight: bold;
+    color: #333;
+}
+
+.filter-controls input[type="number"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 80px; /* 适当宽度 */
+    text-align: center;
+}
+
+.filter-controls .btn {
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* 暂无图片消息样式 */
+#noImagesMessage {
+    margin-top: 50px;
+    font-size: 1.2em;
+    color: #777;
+}

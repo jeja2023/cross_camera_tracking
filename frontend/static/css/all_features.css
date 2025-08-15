@@ -1,0 +1,140 @@
+/* all_features 页面特定样式 */
+/* 用于全部特征图库页面的自定义样式 */
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 与video_results.css保持一致 */
+    gap: 30px;
+    margin-top: 25px;
+    padding: 15px;
+}
+
+.result-item {
+    background-color: #fefefe;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 20px; /* 与video_results.css保持一致 */
+    text-align: left; /* 确保所有文本靠左对齐 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.result-item img {
+    max-width: 100%;
+    width: 100%; /* 确保占据父容器完整宽度 */
+    height: 180px; /* 设置固定高度 */
+    object-fit: contain; /* 保持图片完整显示，适应盒子 */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: block; /* 确保图片占据完整宽度且无额外空间 */
+}
+
+.result-item p {
+    margin: 5px 0; /* 调整段落间距 */
+    color: #555;
+    font-size: 0.9em; /* 与video_results.css保持一致 */
+    word-break: break-word; /* 确保长文本换行 */
+    text-align: left; /* 明确左对齐段落 */
+}
+
+.result-item p.time-info {
+    white-space: nowrap; /* 确保日期和时间在同一行显示 */
+    overflow: hidden; /* 隐藏溢出内容 */
+    text-overflow: ellipsis; /* 显示省略号 */
+    font-size: 0.8em; /* 稍微减小字体大小，以确保完整显示 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* 与video_results.css保持一致 */
+        gap: 20px;
+    }
+    .result-item {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .results-grid {
+        grid-template-columns: 1fr; /* 在极小屏幕上堆叠项目 */
+        gap: 15px;
+    }
+    .result-item {
+        padding: 10px;
+    }
+}
+
+.top-controls {
+    display: flex;
+    justify-content: space-between; /* 将筛选和导出区域推向两端 */
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.filter-export-group {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 筛选部分和导出按钮之间的间距 */
+    flex-wrap: wrap; /* 允许在空间不足时换行 */
+}
+
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 输入框和筛选按钮之间的间距 */
+}
+
+.filter-section input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1; /* 允许输入框在必要时扩展 */
+    max-width: 250px; /* 限制输入框的最大宽度 */
+    font-size: 1em;
+}
+
+.filter-section button, .export-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.filter-section button:hover, .export-button:hover {
+    background-color: #0056b3;
+}
+
+/* 媒体查询以适应小屏幕 */
+@media (max-width: 992px) {
+    .top-controls {
+        flex-direction: column; /* 在小屏幕上垂直堆叠 */
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .filter-export-group {
+        flex-direction: column; /* 垂直堆叠 */
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .filter-section input[type="text"] {
+        width: 100%; /* 填充可用宽度 */
+    }
+    .filter-section, .export-button {
+        width: 100%; /* 填充可用宽度 */
+        justify-content: flex-start; /* 左对齐 */
+    }
+} 

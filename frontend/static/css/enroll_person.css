@@ -1,0 +1,358 @@
+/* frontend/static/css/enroll_person.css */
+
+:root {
+    --primary-color: #007bff;
+    --primary-color-dark: #0056b3;
+    --secondary-color: #6c757d;
+    --background-color: #f4f7f6;
+    --card-bg-color: #ffffff;
+    --text-color-primary: #333333;
+    --text-color-secondary: #666666;
+    --border-color: #dddddd;
+    --input-bg-color: #ffffff;
+    --button-bg-color: #e9ecef;
+    --button-text-color: #333333;
+    --button-border-color: #ced4da;
+    --button-hover-bg-color: #dae0e5;
+    --button-hover-text-color: #212529;
+    --shadow-small: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color-primary);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 20px; /* Add some padding around the content */
+    min-height: 100vh; /* Ensure full viewport height */
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px; /* Max width for content */
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    padding: 30px;
+    box-sizing: border-box;
+    margin: 20px auto; /* Vertical margin and horizontal auto for centering */
+}
+
+#enroll-person-section {
+    background-color: var(--card-bg-color); /* Already defined by .container now */
+    padding: 25px; /* Already defined by .container now */
+    border-radius: 8px; /* Already defined by .container now */
+    box-shadow: var(--shadow-small); /* Already defined by .container now */
+    margin-top: 20px; /* Use container margin instead */
+}
+
+#enroll-person-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+#enroll-person-section p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color-secondary);
+    font-size: 1.1em;
+}
+
+.form-group {
+    margin-bottom: 25px; /* Increased spacing */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600; /* Bolder label */
+    color: var(--text-color-primary);
+    font-size: 1.05em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"] {
+    width: 100%; /* Full width */
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Slightly more rounded */
+    box-sizing: border-box; 
+    background-color: var(--input-bg-color);
+    color: var(--text-color-primary);
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="file"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Focus highlight */
+    outline: none;
+}
+
+.form-group input[type="file"] {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.image-upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.image-upload-area:hover {
+    border-color: var(--primary-color);
+}
+
+.image-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Larger previews */
+    gap: 15px; /* More space between images */
+    margin-top: 20px;
+    border: none; /* Remove dashed border, use individual image borders */
+    padding: 0;
+    min-height: auto; /* Allow height to adjust */
+}
+
+.image-preview-grid img {
+    width: 100%; /* Fill grid cell */
+    height: 120px; /* Fixed height for consistency */
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid var(--border-color); /* Stronger border */
+    box-shadow: var(--shadow-small);
+    transition: transform 0.2s ease;
+}
+
+.image-preview-grid img:hover {
+    transform: scale(1.03);
+}
+
+/* 新增：图片预览项容器样式，用于定位删除图标 */
+.image-preview-item {
+    position: relative; /* 允许内部绝对定位 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border-color); /* 添加边框以匹配图片风格 */
+    border-radius: 6px;
+    padding: 5px; /* 内部间距 */
+    box-shadow: var(--shadow-small);
+    background-color: var(--card-bg-color);
+}
+
+.image-preview-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px; /* 略小于容器圆角 */
+    margin-bottom: 5px; /* 图片下方留出空间 */
+}
+
+/* 新增：删除图标样式 */
+.delete-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 0, 0, 0.7); /* 半透明红色背景 */
+    color: white;
+    border-radius: 50%; /* 圆形 */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    opacity: 0; /* 默认隐藏 */
+}
+
+.image-preview-item:hover .delete-icon {
+    opacity: 1; /* 鼠标悬停时显示 */
+    transform: scale(1.1); /* 悬停时放大 */
+}
+
+.delete-icon:hover {
+    background-color: rgba(255, 0, 0, 1); /* 悬停时完全不透明 */
+}
+
+.info-box {
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg-color);
+    padding: 20px; /* Increased padding */
+    border-radius: 8px; /* More rounded */
+    margin-top: 25px; /* Increased spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px; /* Increased spacing */
+    box-shadow: var(--shadow-small);
+}
+
+.info-box p {
+    margin: 0;
+    font-size: 1em; /* Slightly larger font */
+    color: var(--text-color-primary);
+    text-align: left;
+}
+
+.info-box img {
+    align-self: center;
+    margin-top: 15px; /* Increased spacing */
+    max-width: 100px; /* Larger image in info box */
+    max-height: 100px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em; /* Slightly larger font */
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 15px; /* Consistent top margin */
+}
+
+.button.primary-button {
+    background-color: var(--primary-color);
+    color: white;
+    display: block; /* Now apply block and 100% width only to primary buttons */
+    width: 100%;
+}
+
+.button.primary-button:hover {
+    background-color: var(--primary-color-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.button:not(.primary-button) {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: 1px solid var(--button-border-color);
+}
+
+.button:not(.primary-button):hover {
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-hover-text-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-small);
+}
+
+#search-existing-person {
+    margin-left: 10px;
+    padding: 10px 20px; /* Adjust padding for better look */
+    vertical-align: middle; 
+    width: auto; /* Allow search button to size content */
+}
+
+#select-existing-person {
+    align-self: flex-end; 
+}
+
+.status-message {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.status-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    #enroll-person-section h2 {
+        font-size: 1.8em;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .image-preview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 10px;
+    }
+
+    .image-preview-grid img {
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+        margin: 5px;
+    }
+
+    #enroll-person-section h2 {
+        font-size: 1.5em;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="file"] {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+
+    .button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    #search-existing-person {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
+/* 强制为主动注册页面设置导航栏返回主页按钮样式，确保与common.css一致 */
+.header .user-info .home-button {
+    background-color: #f39c12; /* 与common.css中的 home-button 保持一致 */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-decoration: none; /* 移除下划线 */
+    display: inline-block; /* 确保它像块级元素一样可以设置内边距和外边距 */
+    width: auto; /* 确保按钮宽度根据内容自适应 */
+} 

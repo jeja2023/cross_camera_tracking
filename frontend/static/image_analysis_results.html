@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片解析结果 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/image_analysis_results.css"> <!-- 新增样式文件 -->
+</head>
+<body>
+    <header class="header">
+        <div class="logo">图片解析结果</div>
+        <nav>
+            <!-- 导航链接，例如返回图片解析列表 -->
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="loadingMessage" class="loading-message" style="display: none;">
+            <div class="spinner"></div> 正在加载图片解析结果，请稍候...
+        </div>
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+        <div id="imageAnalysisResults" class="analysis-results-container" style="display: none;">
+            <div class="original-image-section card">
+                <h3>原始图片</h3>
+                <!-- <p>文件名: <span id="originalImageFilenameDisplay"></span></p> -->
+                <!-- <p>上传时间: <span id="uploadedTimeDisplay"></span></p> -->
+                <div class="image-preview-wrapper">
+                    <img id="originalImageDisplay" class="original-display-thumbnail" src="" alt="原始图片">
+                </div>
+            </div>
+
+            <div class="detected-persons-section card">
+                <h3>检测到的人物 (<span id="detectedPersonsCount">0</span> 个):</h3>
+                <div class="person-grid" id="personGrid">
+                    <!-- 检测到的人物裁剪图将动态加载到这里 -->
+                </div>
+                <p id="noPersonsMessage" class="info-message" style="display: none;">未检测到人物。</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="hidden">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <a class="prev" id="lightbox-prev">&#10094;</a>
+        <a class="next" id="lightbox-next">&#10095;</a>
+    </div>
+
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/common.js" type="module"></script>
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initImageAnalysisResultsPage } from '/static/js/image_analysis_results.js'; // 导入图片解析结果页面初始化函数
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage(); // 初始化认证相关逻辑
+            initImageAnalysisResultsPage(); // 初始化图片解析结果页面逻辑
+        });
+    </script>
+</body>
+</html> 

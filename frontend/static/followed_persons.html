@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关注人员 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/followed_persons.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">关注人员</div>
+        <nav>
+            <!-- 无导航链接 -->
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="搜索姓名或身份证号...">
+            <button id="search-button">搜索</button>
+        </div>
+
+        <table id="followed-persons-table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>身份证号码/ID</th>
+                    <th>关注时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 数据将在这里加载 -->
+            </tbody>
+        </table>
+
+        <div class="pagination-controls">
+            <button id="prev-page" disabled>上一页</button>
+            <span id="page-info">页数：1 / 1</span>
+            <button id="next-page" disabled>下一页</button>
+        </div>
+
+    </div>
+
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/common.js" type="module"></script>
+    <script src="/static/js/followed_persons.js" type="module"></script>
+</body>
+</html>

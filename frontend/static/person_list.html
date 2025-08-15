@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人员档案 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/person_list.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">人员档案</div>
+        <nav>
+            <!-- 无导航链接 -->
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="person-list-section">
+            <div class="filter-section">
+                <input type="text" id="person-search-input" placeholder="搜索人物... (UUID/名称/身份证)" class="form-control mb-2">
+                <select id="filter-marked-for-retrain" class="form-select mb-2">
+                    <option value="">所有再训练标记</option>
+                    <option value="true">是</option>
+                    <option value="false">否</option>
+                </select>
+                <button id="apply-person-filter-button" class="btn btn-primary">应用筛选</button>
+                <button id="export-persons-btn" class="btn btn-success ms-2">导出</button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th class="name-column">姓名</th>
+                            <th>身份证号/ID</th>
+                            <th>UUID</th>
+                            <th>裁剪图像</th>
+                            <th>来源 (视频/视频流/图片)</th>
+                            <th>上传用户</th>
+                            <th class="created-at-column">创建时间</th>
+                            <th>审核状态</th>
+                            <th>再训练标记</th>
+                            <th>置信度</th>
+                            <th class="actions-column">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="personTableBody">
+                        <!-- 人员信息将在这里加载 -->
+                    </tbody>
+                </table>
+
+                <div class="pagination-controls">
+                    <button id="firstPageBtn" class="pagination-button">首页</button>
+                    <button id="prevPageBtn" disabled>上一页</button>
+                    <span id="pageInfo">页码 1 / 1</span>
+                    <button id="nextPageBtn" disabled>下一页</button>
+                    <button id="lastPageBtn" class="pagination-button">尾页</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/common.js" type="module"></script>
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initPersonListPage } from '/static/js/person_list.js'; // Import the initPersonListPage function
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAuthenticatedPage();
+            initPersonListPage(); // Call the initialization function for the person list page
+        });
+    </script>
+
+    <!-- Common Lightbox Structure (required by common.js) -->
+    <div id="lightbox" class="lightbox hidden">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <button id="lightbox-prev" class="lightbox-nav-button prev">&#10094;</button>
+        <button id="lightbox-next" class="lightbox-nav-button next">&#10095;</button>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息管理 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/profile_page.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">个人信息管理</div>
+        <nav>
+            <!-- 其他导航链接如果需要可以加在这里 -->
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>个人信息</h2>
+            <form id="profile-form">
+                <div class="form-item-row">
+                    <label for="username">用户名:</label>
+                    <input type="text" id="username" name="username" readonly>
+                </div>
+
+                <div class="form-item-row">
+                    <label for="unit">单位:</label>
+                    <input type="text" id="unit" name="unit" placeholder="请输入您的单位">
+                </div>
+
+                <div class="form-item-row">
+                    <label for="phone-number">电话号码:</label>
+                    <input type="text" id="phone-number" name="phone_number" placeholder="请输入您的电话号码">
+                </div>
+
+                <button type="submit" class="button">更新信息</button>
+            </form>
+
+            <h3>修改密码</h3>
+            <form id="password-form">
+                <div class="form-item-row">
+                    <label for="current-password">当前密码:</label>
+                    <input type="password" id="current-password" name="current_password" required>
+                </div>
+
+                <div class="form-item-row">
+                    <label for="new-password">新密码:</label>
+                    <input type="password" id="new-password" name="new_password" required>
+                </div>
+
+                <div class="form-item-row">
+                    <label for="confirm-new-password">确认新密码:</label>
+                    <input type="password" id="confirm-new-password" name="confirm_new_password" required>
+                </div>
+
+                <button type="submit" class="button">修改密码</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        import { initProfilePage } from '/static/js/profile_page.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+            initProfilePage(); // 调用新的初始化函数
+        });
+    </script>
+    <script src="/static/js/profile_page.js" type="module"></script>
+</body>
+</html> 

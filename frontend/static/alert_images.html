@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预警图片 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/image_gallery.css"> <!-- 假设需要一个新的CSS文件 -->
+</head>
+<body>
+    <header class="header">
+        <div class="logo">预警图片</div>
+        <nav>
+            <!-- 无导航链接 -->
+        </nav>
+        <div class="user-info">
+            <a href="/followed_persons" class="button home-button">返回关注人员</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1><span id="personNameDisplay"></span>的预警图片</h1>
+        <div class="filter-controls">
+            <label for="minScore">最低比对分值 (0-100):</label>
+            <input type="number" id="minScore" value="90" min="0" max="100">
+            <button id="applyFilterBtn" class="btn btn-primary">应用筛选</button>
+        </div>
+        <div id="imageGallery" class="image-gallery-grid">
+            <!-- 图片将在这里加载 -->
+        </div>
+        <p id="noImagesMessage" style="text-align: center; color: #888; display: none;">暂无预警图片。</p>
+    </div>
+
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/common.js" type="module"></script>
+    <script src="/static/js/alert_images.js" type="module"></script> <!-- 新的JS文件 -->
+</body>
+</html>

@@ -1,0 +1,62 @@
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 修改为每行三个按钮 */
+    gap: 20px;
+    padding: 30px 0;
+    max-width: 1200px; /* 调整最大宽度以适应三列布局 */
+    margin: 50px auto; /* 增加顶部外边距，使其更居中 */
+}
+
+.feature-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    border: 1px solid #d0d0d0;
+    padding: 30px; /* 增加内边距 */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2); /* 悬停时更强的阴影 */
+    border-color: #a0a0a0; /* 悬停时边框颜色更深 */
+}
+
+.feature-card h2 {
+    color: #2c3e50;
+    font-size: 20px;
+    font-weight: 600; /* 增加字体粗细 */
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.feature-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-card li {
+    margin-bottom: 12px;
+}
+
+.feature-card a {
+    text-decoration: none;
+    color: #3498db;
+    font-size: 16px;
+    font-weight: 600; /* 增加字体粗细 */
+    transition: color 0.3s ease;
+    display: block;
+    padding: 8px 0;
+}
+
+.feature-card a:hover {
+    color: #2475a3;
+    text-decoration: none;
+}
+
+.feature-card .sub-features {
+    display: none; /* 默认隐藏子功能 */
+} 

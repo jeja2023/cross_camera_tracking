@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关注人员预警信息</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/all_features.css"> <!-- 更改为 all_features.css -->
+    <link rel="stylesheet" href="/static/css/followed_person_alerts.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">关注人员预警信息</div>
+        <nav>
+            <!-- 可以添加其他导航链接，如果需要 -->
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </header>
+    <main>
+        <section class="content-section">
+            <div id="alerts-results-section" class="history-results-section">
+                <h2><span id="individual-name-display"></span> (<span id="individual-id-card-display"></span>) 的预警信息</h2>
+                <div id="query-controls" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; display: none;"> <!-- 隐藏查询控件 -->
+                    <button id="query-alerts-button" class="button primary-button">查询预警信息</button>
+                    <span id="last-query-time-display" style="font-size: 0.9em; color: #666;">最近查询时间: 无</span>
+                </div>
+                <div id="alerts-message" class="message-area"></div>
+                <div id="alerts-results-container" class="results-grid"> <!-- 更改为 results-grid -->
+                    <!-- 预警信息搜索结果将在这里加载 -->
+                </div>
+
+                <!-- 图片放大模态框 -->
+                <div id="lightbox" class="modal hidden"> <!-- 添加 hidden 类以默认隐藏 -->
+                    <span class="lightbox-close">&times;</span>
+                    <img id="lightbox-img" class="modal-content"> <!-- 将 id 从 "modal-image" 更改为 "lightbox-img" -->
+                    <a id="lightbox-prev" class="modal-nav-button prev">&#10094;</a>
+                    <a id="lightbox-next" class="modal-nav-button next">&#10095;</a>
+                    <div id="image-info"></div>
+                </div>
+
+                <!-- 分页控件容器 -->
+                <div id="pagination-controls" class="pagination-controls">
+                    <button id="first-page-button" class="button secondary-button" disabled>首页</button>
+                    <button id="prev-page-button" class="button secondary-button" disabled>上一页</button>
+                    <span id="page-info">页数: 1 / 1</span>
+                    <button id="next-page-button" class="button secondary-button" disabled>下一页</button>
+                    <button id="last-page-button" class="button secondary-button" disabled>尾页</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="/static/js/auth.js"></script>
+    <script type="module" src="/static/js/common.js"></script>
+    <script type="module" src="/static/js/followed_person_alerts.js"></script>
+</body>
+</html>

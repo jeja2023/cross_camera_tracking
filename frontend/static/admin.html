@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员后台 - 跨域智能识别系统</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">管理员后台</div>
+        <nav>
+            <button id="show-logs-button" class="nav-button active">系统日志</button>
+            <button id="show-users-button" class="nav-button">用户管理</button>
+            <button id="show-model-parameters-button" class="nav-button">系统参数</button>
+        </nav>
+        <div class="user-info">
+            <a href="/index" class="button home-button">返回主页</a>
+            <span>欢迎, <span id="username-display"></span> (<span id="role-display"></span>)</span>
+            <button id="logout-button">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="system-logs">
+            <h2>系统日志</h2>
+            <div class="log-filters">
+                <label for="log-level-filter">级别:</label>
+                <select id="log-level-filter">
+                    <option value="">所有</option>
+                    <option value="INFO">INFO</option>
+                    <option value="WARNING">WARNING</option>
+                    <option value="ERROR">ERROR</option>
+                </select>
+                <label for="log-start-time">开始时间:</label>
+                <input type="datetime-local" id="log-start-time">
+                <label for="log-end-time">结束时间:</label>
+                <input type="datetime-local" id="log-end-time">
+                <label for="log-keyword">关键词:</label>
+                <input type="text" id="log-keyword" placeholder="输入关键词">
+                <button id="filter-logs-button">查询日志</button>
+                <button id="refresh-logs-button">刷新日志</button>
+            </div>
+            <div class="table-wrapper">
+                <table id="log-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>来源</th>
+                            <th>级别</th>
+                            <th>消息</th>
+                            <th>用户</th>
+                            <th>IP 地址</th>
+                        </tr>
+                    </thead>
+                    <tbody id="log-table-body">
+                        <!-- 日志数据将在这里加载 -->
+                    </tbody>
+                </table>
+            </div>
+            <p id="no-logs-message" class="hidden">未找到日志。</p>
+            <div id="log-loading" class="hidden">
+                <div class="spinner"></div>
+                <p>正在加载日志...</p>
+            </div>
+            <div class="pagination-controls">
+                <button id="first-log-page" class="pagination-button">首页</button>
+                <button id="prev-log-page" disabled>&lt; 上一页</button>
+                <span id="log-page-info">页 1 / 1</span>
+                <button id="next-log-page" disabled>下一页 &gt;</button>
+                <button id="last-log-page" class="pagination-button">尾页</button>
+            </div>
+        </section>
+
+        <section id="user-management" class="hidden">
+            <h2>用户管理</h2>
+            <div class="user-filters">
+                <label for="user-status-filter">状态:</label>
+                <select id="user-status-filter">
+                    <option value="">所有</option>
+                    <option value="true">活跃</option>
+                    <option value="false">非活跃</option>
+                </select>
+                <button id="filter-users-button">筛选用户</button>
+                <button id="refresh-users-button">刷新用户列表</button>
+            </div>
+            <table id="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>用户名</th>
+                        <th>角色</th>
+                        <th>单位</th>
+                        <th>手机号码</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 用户数据将在这里加载 -->
+                </tbody>
+            </table>
+
+            <h3>添加新用户</h3>
+            <form id="add-user-form">
+                <input type="text" id="add-username" placeholder="用户名" required autocomplete="off">
+                <input type="password" id="add-password" placeholder="密码" required autocomplete="new-password">
+                <input type="text" id="add-unit" placeholder="单位" autocomplete="off">
+                <input type="text" id="add-phone-number" placeholder="手机号码" autocomplete="off">
+                <select id="add-role">
+                    <option value="user">普通用户</option>
+                    <option value="advanced">高级用户</option>
+                    <option value="admin">管理员</option>
+                </select>
+                <button type="submit">添加用户</button>
+            </form>
+
+        </section>
+
+        <section id="system-parameters" class="hidden">
+            <h2>系统参数配置</h2>
+            <div id="system-config-message" class="message hidden"></div>
+            <div class="system-config-layout">
+                <div id="system-config-sidebar" class="system-config-sidebar"></div>
+                <div class="system-config-main-content">
+                    <div id="system-config-fields-container"></div>
+                    <div id="system-config-loading" class="loading hidden">
+                        <div class="spinner"></div>
+                        <p>正在加载系统参数...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/js/common.js" type="module"></script>
+    <script src="/static/js/auth.js" type="module"></script>
+    <script src="/static/js/admin.js" type="module"></script>
+    <script type="module">
+        import { initializeAuthenticatedPage } from '/static/js/common.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthenticatedPage();
+        });
+    </script>
+</body>
+</html> 

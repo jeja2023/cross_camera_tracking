@@ -1,0 +1,357 @@
+/* static/css/image_search.css (Optimized) */
+
+/* General Container and Card Styles (No major changes) */
+.container {
+    max-width: 1400px; /* Increased width */
+    margin: 30px auto;
+    padding: 0 25px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    padding: 30px 45px;
+    margin-bottom: 35px;
+}
+
+h1, h2 { /* Combined for brevity */
+    text-align: center;
+    color: #2c3e50;
+    font-weight: 600;
+}
+h1 {
+    margin-bottom: 35px;
+    font-size: 2.8em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+h2 {
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+
+/* --- Optimization 1: Unified Query Section --- */
+.main-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Query Section: Styled as a single, unified card */
+.query-section {
+    flex: 0 0 420px; /* Slightly adjusted width */
+    display: flex;
+    flex-direction: column;
+    background-color: #fff; /* White background for the card */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* Unified shadow */
+    overflow: hidden; /* Ensures child elements conform to border-radius */
+}
+
+/* Upload Area: Integrated into the new query card */
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+    text-align: center;
+    background-color: #f7fafd; /* Subtle background color */
+    border-bottom: 1px solid #e9eef5; /* Separator line */
+    transition: background-color 0.3s ease;
+    /* Removed individual border and shadow */
+}
+
+.upload-area:hover {
+    background-color: #eef5fc; /* More subtle hover effect */
+}
+
+.upload-label {
+    display: inline-block;
+    padding: 14px 30px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.15em;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    margin-bottom: 25px;
+}
+
+.upload-label:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+#image-preview {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    margin-top: 25px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Controls: Integrated into the new query card */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Adjusted gap */
+    background-color: #fff;
+    padding: 35px;
+    /* Removed individual shadow and radius */
+}
+
+.control-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Adjusted gap */
+}
+
+.control-item label {
+    font-weight: 600;
+    color: #333;
+    font-size: 1em;
+}
+
+.control-item select,
+.control-item input[type="range"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c0cddf;
+    border-radius: 6px;
+    font-size: 1.05em;
+    color: #333;
+    background-color: #f5faff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.control-item select:focus, .control-item input[type="range"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+    outline: none;
+}
+
+/* Slider Styles (No changes) */
+.control-item input[type="range"] { -webkit-appearance: none; appearance: none; height: 10px; background: #e0e0e0; border-radius: 5px; outline: none; opacity: 0.9; transition: opacity .2s; }
+.control-item input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #3498db; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.25); margin-top: -7px; }
+.control-item input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #3498db; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.25); }
+#threshold-value { font-weight: bold; color: #3498db; font-size: 1.1em; }
+
+
+/* Buttons (No major changes) */
+#search-button, #export-search-results-button { width: 100%; padding: 15px 25px; font-size: 1.1em; font-weight: 700; border-radius: 8px; margin-top: 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.15); transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; }
+#search-button { background-color: #3498db; color: white; border: none; }
+#search-button:hover { background-color: #2980b9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3); }
+#export-search-results-button { background-color: #28a745; color: white; border: none; margin-top: 10px; }
+#export-search-results-button:hover { background-color: #218838; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3); }
+
+
+/* Query Person Navigation */
+.query-person-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #f0f6fc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.query-person-nav .pagination-button {
+    padding: 10px 20px;
+    font-size: 0.95em;
+    font-weight: 600;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.query-person-nav .pagination-button:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+.query-person-nav .pagination-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+#current-query-person-info {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #555;
+    min-width: 150px; /* 确保有足够空间显示文本 */
+    text-align: center;
+}
+
+
+/* Results Section (No layout changes) */
+.results-section {
+    flex: 1;
+}
+
+.results-section h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+}
+
+/* Query Person Section Styles */
+.query-person-section {
+    background-color: #fefefe;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 25px;
+    margin-bottom: 30px; /* Space between different query person sections if they were stacked */
+    text-align: center; /* Center block-level content inside */
+}
+
+.query-person-section h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #34495e;
+}
+
+.query-person-img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.query-person-section p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* --- Optimization 2: Improved Result Item Display --- */
+.result-item {
+    background-color: #fefefe;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 15px; /* Adjusted padding */
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex; /* Added for better internal control if needed */
+    flex-direction: column;
+}
+
+.result-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.result-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.result-item .result-info {
+    margin-top: 15px; /* Add space between image and text */
+    flex-grow: 1; /* Allow this section to grow */
+}
+
+.result-item p {
+    margin: 8px 0; /* Adjusted for better spacing */
+    color: #333; /* Darker text for better contrast */
+    font-size: 0.9em;
+    word-break: break-word;
+    text-align: left;
+    line-height: 1.4;
+}
+
+.result-item p strong {
+    color: #555; /* Slightly lighter color for the label text */
+    margin-right: 8px; /* Space between label and value */
+    white-space: nowrap; /* Prevent label from wrapping */
+}
+
+/* Loading & No Results Styles (No changes) */
+#loading-indicator, #no-results-message { text-align: center; padding: 60px; font-size: 1.2em; color: #666; }
+.spinner { border: 6px solid #f3f3f3; border-top: 6px solid #3498db; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin: 0 auto 25px; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .main-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .main-layout .query-section,
+    .main-layout .results-section {
+        flex: none;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .results-section h3 {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container { padding: 0 15px; }
+    .card { padding: 20px 25px; }
+    h1 { font-size: 2.2em; margin-bottom: 25px; }
+    h2 { font-size: 1.8em; margin-bottom: 20px; }
+    .query-section { flex: 0 0 auto; } /* Let it resize */
+    .upload-area, .controls { padding: 25px; }
+    .upload-label { font-size: 1em; padding: 12px 20px; }
+    #image-preview { max-height: 250px; }
+    .control-item label { font-size: 0.9em; }
+    .control-item select, .control-item input[type="range"] { font-size: 0.95em; padding: 10px; }
+    #threshold-value { font-size: 1em; }
+    #search-button, #export-search-results-button { font-size: 1em; padding: 12px 20px; }
+    .results-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; padding: 5px; }
+    .result-item { padding: 15px; }
+    .result-item img { height: 150px; }
+}
+
+@media (max-width: 480px) {
+    .card { padding: 15px; }
+    h1 { font-size: 1.8em; margin-bottom: 20px; }
+    h2 { font-size: 1.6em; margin-bottom: 15px; }
+    .upload-area, .controls { padding: 20px; }
+    .controls { gap: 15px; }
+    .results-grid { grid-template-columns: 1fr 1fr; gap: 15px; } /* Two columns for smaller screens */
+    .result-item { padding: 10px; }
+    .result-item img { height: 120px; }
+    .result-item p { font-size: 0.8em; }
+    #loading-indicator, #no-results-message { padding: 30px; font-size: 1em; }
+    .spinner { width: 40px; height: 40px; border-width: 4px; margin: 0 auto 15px; }
+}
