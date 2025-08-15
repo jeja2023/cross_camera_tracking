@@ -322,7 +322,7 @@ http://localhost:8000
 cross_camera_tracking/
 ├── alembic/                # Alembic 数据库迁移工具相关文件
 ├── backend/                # 后端 FastAPI 应用程序
-│   ├── __init__.py
+│   ├── __init__.py        # 包初始化
 │   ├── auth.py             # 认证相关辅助函数
 │   ├── celery_app.py       # Celery 应用配置
 │   ├── celery_worker.py    # Celery Worker 启动脚本
@@ -344,7 +344,7 @@ cross_camera_tracking/
 │   │   └── sort.py         # SORT 目标跟踪算法实现
 │   ├── models/             # AI 模型文件存储目录
 │   ├── routers/            # FastAPI 路由定义
-│   │   ├── __init__.py
+│   │   ├── __init__.py     # 路由包初始化
 │   │   ├── admin_routes.py # 管理员功能 (用户管理、模型配置、日志)
 │   │   ├── auth_routes.py  # 认证和用户注册
 │   │   ├── export_routes.py# 数据导出功能 (Excel 报告)
@@ -357,39 +357,39 @@ cross_camera_tracking/
 │   │   └── video_routes.py # 视频管理与处理
 │   ├── saved_streams/      # 实时视频流处理后保存的视频文件
 │   ├── schemas.py          # Pydantic 数据模型定义 (请求/响应体、数据库模型映射)
-│   ├── stream_manager.py   # 视频流管理 (如 Redis 帧缓存)
+│   ├── stream_manager.py   # 视频流调度/状态管理 (如 Redis 帧缓冲)
 │   ├── uploads/            # 用户上传的视频、图片临时存储目录
 │   └── utils/              # 工具函数
 │       ├── media_processing.py # 媒体处理辅助函数
 │       └── realtime_comparison.py # 实时比对辅助函数
 ├── frontend/               # 前端静态文件
 │   └── static/             # 静态资源 (HTML, CSS, JS)
-│       ├── admin.html
-│       ├── alert_images.html
-│       ├── all_features.html
-│       ├── auto_tracking.html
-│       ├── css/            # 样式表文件
-│       ├── enroll_person.html
-│       ├── enrollment_images_viewer.html
-│       ├── enrollment_images.html
-│       ├── followed_person_alerts.html
-│       ├── followed_person_history.html
-│       ├── followed_persons.html
-│       ├── historical_tracking.html
-│       ├── human_review.html
-│       ├── image_analysis_results.html
-│       ├── image_analysis.html
-│       ├── image_search.html
-│       ├── index.html
-│       ├── js/             # JavaScript 逻辑文件
-│       ├── live_stream_results.html
-│       ├── login.html
-│       ├── person_list.html
-│       ├── profile_page.html
-│       ├── realtime_tracking.html
-│       ├── video_analysis.html
-│       ├── video_results.html
-│       └── video_stream.html
+│       ├── admin.html                    # 管理后台入口
+│       ├── alert_images.html             # 预警图片查看
+│       ├── all_features.html             # 功能总览入口
+│       ├── auto_tracking.html            # 自动跟踪演示
+│       ├── css/                          # 样式表文件
+│       ├── enroll_person.html            # 主动注册人物
+│       ├── enrollment_images_viewer.html # 注册图片查看器
+│       ├── enrollment_images.html        # 注册图片上传
+│       ├── followed_person_alerts.html   # 关注人员预警列表
+│       ├── followed_person_history.html  # 关注人员历史轨迹
+│       ├── followed_persons.html         # 关注人员管理
+│       ├── historical_tracking.html      # 历史视频检索与跟踪
+│       ├── human_review.html             # 人机回环审核
+│       ├── image_analysis_results.html   # 图片分析结果
+│       ├── image_analysis.html           # 图片分析上传页
+│       ├── image_search.html             # 以图搜人
+│       ├── index.html                    # 系统首页
+│       ├── js/                           # JavaScript 逻辑文件
+│       ├── live_stream_results.html      # 实时流结果页
+│       ├── login.html                    # 登录页面
+│       ├── person_list.html              # 人物列表
+│       ├── profile_page.html             # 个人资料页
+│       ├── realtime_tracking.html        # 实时跟踪展示
+│       ├── video_analysis.html           # 视频分析上传页
+│       ├── video_results.html            # 视频分析结果
+│       └── video_stream.html             # 视频流播放/控制
 ├── alembic.ini             # Alembic 配置文件
 ├── pyproject.toml          # 项目元数据 (PEP 621)
 ├── README.md               # 项目说明文档
